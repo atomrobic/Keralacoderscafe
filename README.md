@@ -41,4 +41,4 @@ This is a "Coming Soon" landing page for our community, built with:
 
 This project is powered by amazing people! Our landing page automatically fetches and displays our top contributors from GitHub.
 
-Special thanks to everyone who helps make KCC a great space!
+Special thanks to everyone who helps make KCC ( Kerala Coders Community)  a great space!

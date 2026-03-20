@@ -13,15 +13,30 @@ function emitThemeChange() {
   listeners.forEach((listener) => listener());
 }
 
-function applyTheme(nextTheme: Theme) {
+function getSystemTheme(): Theme {
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-color-scheme: light)").matches
+  ) {
+    return "light";
+  }
+
+  return "dark";
+}
+
+function applyTheme(nextTheme: Theme, persist = true) {
   const root = document.documentElement;
   root.dataset.theme = nextTheme;
   root.style.colorScheme = nextTheme;
-  localStorage.setItem(STORAGE_KEY, nextTheme);
+
+  if (persist) {
+    localStorage.setItem(STORAGE_KEY, nextTheme);
+  }
 }
 
-function readStoredTheme(): Theme {
-  return localStorage.getItem(STORAGE_KEY) === "light" ? "light" : "dark";
+function readStoredTheme(): Theme | null {
+  const storedTheme = localStorage.getItem(STORAGE_KEY);
+  return storedTheme === "light" || storedTheme === "dark" ? storedTheme : null;
 }
 
 function getThemeSnapshot(): Theme {
@@ -42,12 +57,32 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
 
   useEffect(() => {
     const initialTheme = readStoredTheme();
-    applyTheme(initialTheme);
+    applyTheme(initialTheme ?? getSystemTheme(), Boolean(initialTheme));
     emitThemeChange();
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+
+    const syncSystemTheme = () => {
+      if (readStoredTheme()) {
+        return;
+      }
+
+      applyTheme(getSystemTheme(), false);
+      emitThemeChange();
+    };
+
+    mediaQuery.addEventListener("change", syncSystemTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncSystemTheme);
+    };
   }, []);
 
   function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+    const nextTheme =
+      (readStoredTheme() ?? theme ?? getSystemTheme()) === "dark"
+        ? "light"
+        : "dark";
     applyTheme(nextTheme);
     emitThemeChange();
   }

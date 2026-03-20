@@ -100,7 +100,7 @@ export default function Contributors() {
             </p>
             <h2 className="mt-5 text-[clamp(2.5rem,5vw,4.9rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-[color:var(--ui-page-text)]">
               The people keeping the
-              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_rgba(255,255,255,0.08)]">
+              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_var(--ui-heading-shadow)]">
                 repo alive.
               </span>
             </h2>

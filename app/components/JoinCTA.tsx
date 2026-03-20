@@ -35,7 +35,7 @@ export default function JoinCTA() {
             </p>
             <h2 className="mt-5 text-[clamp(2.6rem,5vw,5rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-[color:var(--ui-page-text)]">
               Pick a simple way to
-              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_rgba(255,255,255,0.08)]">
+              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_var(--ui-heading-shadow)]">
                 join in.
               </span>
             </h2>

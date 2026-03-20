@@ -68,7 +68,7 @@ export default function Hero() {
           <SectionReveal className="max-w-[720px]">
             <h1 className="max-w-[820px] text-[clamp(3.5rem,9vw,7.6rem)] font-semibold leading-[0.88] tracking-[-0.08em] text-[color:var(--ui-page-text)]">
               Kerala Coders
-              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_rgba(255,255,255,0.08)]">
+              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_var(--ui-heading-shadow)]">
                 Cafe
               </span>
             </h1>

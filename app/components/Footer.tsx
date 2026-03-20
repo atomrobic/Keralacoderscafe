@@ -31,7 +31,7 @@ export default function Footer() {
             </div>
             <h2 className="mt-5 max-w-[760px] text-[clamp(2.4rem,5vw,4.8rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-[color:var(--ui-page-text)]">
               Kerala Coders
-              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_rgba(255,255,255,0.08)]">
+              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_var(--ui-heading-shadow)]">
                 Cafe
               </span>
             </h2>

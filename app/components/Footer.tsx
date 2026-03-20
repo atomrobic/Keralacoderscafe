@@ -1,7 +1,15 @@
 import Link from "next/link";
+import { Github, MessageCircle } from "lucide-react";
 
-const quickLinks = ["About Us", "Contributors", "Projects", "GitHub"];
-const quickLinksHrefs = ["#about", "#contributors", "#projects", "https://github.com/atomrobic/keralacoderscafe-saas"];
+const quickLinks = ["About Us", "Contributors", "Projects", "GitHub", "WhatsApp"];
+const quickLinksHrefs = [
+  "#about",
+  "#contributors",
+  "#projects",
+  "https://github.com/KERALACODERSCAFE/Keralacoderscafe",
+  "https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
+];
+
 const resources = ["Documentation", "Community Guidelines", "Contributing Guide", "Code of Conduct"];
 
 export default function Footer() {
@@ -9,41 +17,43 @@ export default function Footer() {
     <footer className="relative bg-kcc-surface-elevated text-kcc-text border-t border-kcc-border">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
+          {/* Brand section */}
           <div className="md:col-span-2">
             <div
-              className="text-3xl font-black tracking-tighter text-kcc-gold mb-3"
+              className="text-3xl font-black tracking-tighter text-kcc-gold mb-4"
               style={{ fontFamily: "var(--font-newsreader)" }}
             >
               Kerala Coders Cafe
             </div>
-            <p className="text-sm text-kcc-text-dim leading-relaxed max-w-md">
+            <p className="text-sm text-kcc-text-dim leading-relaxed max-w-md mb-6">
               Building a thriving community of developers from God's Own Country.
               Code with purpose, collaborate with passion.
             </p>
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-4">
               <Link
-                href="https://github.com/atomrobic/keralacoderscafe-saas"
+                href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
                 target="_blank"
                 rel="noopener"
                 className="text-kcc-text-dim hover:text-kcc-gold transition-colors"
+                aria-label="GitHub"
               >
-                <span className="material-symbols-outlined">code</span>
+                <Github size={20} />
               </Link>
               <Link
                 href="https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
                 target="_blank"
                 rel="noopener"
                 className="text-kcc-text-dim hover:text-kcc-gold transition-colors"
+                aria-label="WhatsApp"
               >
-                <span className="material-symbols-outlined">chat</span>
+                <MessageCircle size={20} />
               </Link>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links section */}
           <div>
-            <h3 className="text-xs tracking-widest text-kcc-gold uppercase mb-4 font-semibold">
+            <h3 className="text-xs tracking-widest text-kcc-gold uppercase mb-6 font-semibold">
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -53,8 +63,10 @@ export default function Footer() {
                     href={quickLinksHrefs[i]}
                     target={quickLinksHrefs[i].startsWith("http") ? "_blank" : undefined}
                     rel={quickLinksHrefs[i].startsWith("http") ? "noopener" : undefined}
-                    className="text-sm text-kcc-text-dim hover:text-kcc-accent transition-colors"
+                    className="text-sm text-kcc-text-dim hover:text-kcc-accent transition-colors flex items-center gap-2"
                   >
+                    {label === "GitHub" && <Github size={14} />}
+                    {label === "WhatsApp" && <MessageCircle size={14} />}
                     {label}
                   </Link>
                 </li>
@@ -62,9 +74,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Resources section */}
           <div>
-            <h3 className="text-xs tracking-widest text-kcc-gold uppercase mb-4 font-semibold">
+            <h3 className="text-xs tracking-widest text-kcc-gold uppercase mb-6 font-semibold">
               Resources
             </h3>
             <ul className="space-y-3">

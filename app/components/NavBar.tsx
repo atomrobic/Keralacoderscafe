@@ -42,7 +42,7 @@ export default function NavBar() {
 
           <div className="flex items-center gap-6">
             <Link
-              href="https://github.com/atomrobic/keralacoderscafe-saas"
+              href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
               target="_blank"
               rel="noopener"
               className="text-kcc-text hover:text-kcc-gold transition-colors hidden sm:block"
@@ -66,9 +66,8 @@ export default function NavBar() {
 
       {/* Mobile Sidebar (Slidebar) */}
       <div
-        className={`fixed inset-0 z-[60] transition-opacity duration-300 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-[60] transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       >
         {/* Backdrop */}
         <div
@@ -78,9 +77,8 @@ export default function NavBar() {
 
         {/* Sidebar Content */}
         <div
-          className={`absolute right-0 top-0 h-full w-[80%] max-w-xs bg-kcc-bg/95 backdrop-blur-2xl border-l border-kcc-border p-8 shadow-2xl transition-transform duration-500 ease-out ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute right-0 top-0 h-full w-[80%] max-w-xs bg-kcc-bg/95 backdrop-blur-2xl border-l border-kcc-border p-8 shadow-2xl transition-transform duration-500 ease-out ${isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <div className="flex justify-end mb-12">
             <button
@@ -97,9 +95,8 @@ export default function NavBar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-2xl font-bold tracking-tight text-kcc-text hover:text-kcc-gold transition-all duration-300 transform ${
-                  isOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-                }`}
+                className={`text-2xl font-bold tracking-tight text-kcc-text hover:text-kcc-gold transition-all duration-300 transform ${isOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+                  }`}
                 style={{
                   transitionDelay: `${i * 100}ms`,
                   fontFamily: "var(--font-headline)"

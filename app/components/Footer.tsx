@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { Github, MessageCircle } from "lucide-react";
+
+const quickLinks = ["About Us", "Contributors", "Projects", "GitHub", "WhatsApp"];
+const quickLinksHrefs = [
+  "#about",
+  "#contributors",
+  "#projects",
+  "https://github.com/KERALACODERSCAFE/Keralacoderscafe",
+  "https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
+];
 
 const quickLinks = [
   { label: "About", href: "#about" },

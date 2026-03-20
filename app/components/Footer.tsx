@@ -1,93 +1,89 @@
 import Link from "next/link";
-import SectionReveal from "./SectionReveal";
-import { GITHUB_REPO_URL, WHATSAPP_GATE_PATH } from "../lib/site-links";
+import { Github, MessageCircle } from "lucide-react";
 
 const quickLinks = [
   { label: "About", href: "#about" },
   { label: "Contributors", href: "#contributors" },
   { label: "Projects", href: "#projects" },
-  { label: "Get Involved", href: "#join" },
+  { label: "Guidelines", href: "#guidelines" },
 ];
 
 const resources = [
   {
     label: "GitHub",
-    href: GITHUB_REPO_URL,
+    href: "https://github.com/KERALACODERSCAFE/Keralacoderscafe",
+    icon: <Github className="h-4 w-4" />,
   },
   {
     label: "WhatsApp",
-    href: WHATSAPP_GATE_PATH,
+    href: "https://chat.whatsapp.com/GisLp4Xp2Y8BkK8XlP2Xp2",
+    icon: <MessageCircle className="h-4 w-4" />,
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[color:var(--ui-border-soft)] px-6 pb-12 pt-14 md:px-12">
-      <div className="mx-auto max-w-[1320px] border border-[color:var(--ui-border-soft)] bg-[color:var(--ui-surface)] shadow-[0_22px_56px_rgba(0,0,0,0.16)]">
-        <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(220px,0.7fr)_minmax(220px,0.7fr)]">
-          <SectionReveal className="border-b border-[color:var(--ui-border-soft)] px-6 py-10 md:px-10 lg:border-b-0 lg:border-r lg:border-r-[color:var(--ui-border-soft)]">
-            <div className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[color:var(--ui-page-text-soft)]">
-              Kerala Coders Cafe
-            </div>
-            <h2 className="mt-5 max-w-[760px] text-[clamp(2.4rem,5vw,4.8rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-[color:var(--ui-page-text)]">
+    <footer className="px-6 pb-12 pt-10 md:px-12">
+      <div className="mx-auto max-w-[1280px] rounded-[2.5rem] border border-black/10 bg-white/70 px-6 py-10 shadow-[0_16px_40px_rgba(17,17,17,0.05)] md:px-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(180px,0.8fr)_minmax(180px,0.8fr)]">
+          <div>
+            <div className="text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-black">
               Kerala Coders
-              <span className="ml-4 inline-block font-[family-name:var(--font-editorial)] italic tracking-[-0.035em] text-[color:var(--ui-page-text)] [text-shadow:0_2px_12px_rgba(255,255,255,0.08)]">
+              <span className="ml-3 font-[family-name:var(--font-editorial)] italic">
                 Cafe
               </span>
-            </h2>
-            <p className="mt-5 max-w-[620px] text-base leading-8 text-[color:var(--ui-page-text-muted)]">
+            </div>
+            <p className="mt-4 max-w-[520px] text-base leading-7 text-black/62">
               A Kerala-first community for developers, designers, contributors,
               and curious people who want to learn in public and build with
               others.
             </p>
-            <div className="mt-7 inline-flex border border-[color:var(--ui-border-soft)] bg-[color:var(--ui-surface)] px-4 py-2 font-[family-name:var(--font-hand)] text-[1.6rem] leading-none text-[color:var(--ui-page-text-muted)]">
+            <p className="mt-5 font-[family-name:var(--font-hand)] text-2xl text-black/54">
               built slowly, shared openly
-            </div>
-          </SectionReveal>
+            </p>
+          </div>
 
-          <SectionReveal
-            delay={0.08}
-            className="border-b border-[color:var(--ui-border-soft)] px-6 py-10 md:px-10 lg:border-b-0 lg:border-r lg:border-r-[color:var(--ui-border-soft)]"
-          >
-            <div className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[color:var(--ui-page-text-soft)]">
+          <div>
+            <div className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-black/42">
               Explore
             </div>
-            <div className="mt-6 flex flex-col">
+            <div className="mt-5 flex flex-col gap-3">
               {quickLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="border-b border-[color:var(--ui-border-soft)] py-3 text-sm text-[color:var(--ui-page-text-muted)] transition-colors hover:text-[color:var(--ui-page-text)]"
+                  className="text-sm text-black/66 transition-all duration-300 hover:text-black hover:translate-x-1"
                 >
                   {link.label}
                 </Link>
               ))}
             </div>
-          </SectionReveal>
+          </div>
 
-          <SectionReveal delay={0.14} className="px-6 py-10 md:px-10">
-            <div className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[color:var(--ui-page-text-soft)]">
+          <div>
+            <div className="text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-black/42">
               Connect
             </div>
-            <div className="mt-6 flex flex-col">
+            <div className="mt-5 flex flex-col gap-3">
               {resources.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener" : undefined}
-                  className="border-b border-[color:var(--ui-border-soft)] py-3 text-sm text-[color:var(--ui-page-text-muted)] transition-colors hover:text-[color:var(--ui-page-text)]"
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-2 text-sm text-black/66 transition-all duration-300 hover:text-black hover:translate-x-1"
                 >
+                  {link.icon}
                   {link.label}
                 </Link>
               ))}
             </div>
-          </SectionReveal>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-[color:var(--ui-border-soft)] px-6 py-5 text-sm text-[color:var(--ui-page-text-soft)] md:px-10 lg:flex-row lg:items-center lg:justify-between">
-          <div>&copy; {new Date().getFullYear()} Kerala Coders Cafe.</div>
-          <div>Built in Kerala for people who build.</div>
+        <div className="mt-10 border-t border-black/8 pt-6 text-sm text-black/46">
+          © {new Date().getFullYear()} Kerala Coders Cafe. Built in Kerala for
+          people who build.
         </div>
       </div>
     </footer>

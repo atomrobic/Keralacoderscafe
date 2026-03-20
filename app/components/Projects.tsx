@@ -185,10 +185,17 @@ export default function Projects() {
           {projects.map((project, i) => (
             <div
               key={project.title}
-              className="card"
+              className="card group"
               style={{ backgroundColor: project.color }}
             >
-              <svg className="card__bg" width="100%" height="100%" aria-hidden="true" fill="white" opacity="0.1">
+              <svg 
+                className="card__bg transition-all duration-500 group-hover:opacity-80 group-hover:scale-110" 
+                width="100%" 
+                height="100%" 
+                aria-hidden="true" 
+                fill="white" 
+                style={{ opacity: 0.3 }}
+              >
                 <use href={`#${project.background}`} />
               </svg>
 
@@ -205,16 +212,6 @@ export default function Projects() {
               <div className="card__content">
                 <h3 className="card__title">{project.title}</h3>
                 <p className="card__description">{project.description}</p>
-                <div className="card__stats">
-                  <div className="card__rating">
-                    <Icon name="star" size={16} />
-                    {project.rating}
-                  </div>
-                  <div className="card__completion">
-                    <Icon name="check-circle" size={16} />
-                    {Math.round(project.completion * 100)}%
-                  </div>
-                </div>
               </div>
             </div>
           ))}

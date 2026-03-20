@@ -40,10 +40,8 @@
 
 @layer utilities {
   .grid-bg {
-    background-image:
-      linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 40px 40px;
     position: fixed;
     inset: 0;
     pointer-events: none;
@@ -53,7 +51,7 @@
   .glow-overlay {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08), transparent 70%);
+    background: radial-gradient(circle at 50% 0%, rgba(45, 80, 22, 0.15), transparent 70%);
     pointer-events: none;
     z-index: 1;
   }

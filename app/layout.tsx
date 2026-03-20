@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Kerala Coders Cafe Team" }],
   creator: "Kerala Coders Cafe",
   publisher: "Kerala Coders Cafe",
+  category: "Technology",
+  alternates: {
+    canonical: "https://kcc.sh",
+  },
   metadataBase: new URL("https://kcc.sh"),
   openGraph: {
     type: "website",
@@ -44,6 +48,24 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
+};
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Kerala Coders Cafe",
+  url: "https://kcc.sh",
+  logo: "https://kcc.sh/logo.png",
+  description:
+    "Community of developers, designers, and tech enthusiasts from Kerala collaborating on open-source and learning together.",
+  sameAs: [
+    "https://github.com/atomrobic/keralacoderscafe-saas",
+    "https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm",
+  ],
 };
 
 export default function RootLayout({
@@ -61,9 +83,12 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+        />
       </head>
       <body className="min-h-full">
-        <div className="grid-bg" />
         <div className="glow-overlay" />
         {children}
       </body>

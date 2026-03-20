@@ -9,7 +9,7 @@ import {
   Users2,
 } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import KccCupMark from "./KccCupMark";
 import ThemeToggle from "./ThemeToggle";
 import { WHATSAPP_GATE_PATH } from "../lib/site-links";
@@ -41,11 +41,30 @@ const mobileNavLinks = [
 export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const [isMobileNavVisible, setIsMobileNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = lastScrollY.current;
+    const delta = latest - previous;
+
     setIsScrolled(latest > 24);
+
+    if (latest <= 24) {
+      setIsMobileNavVisible(true);
+    } else if (delta > 6) {
+      setIsMobileNavVisible(false);
+    } else if (delta < -6) {
+      setIsMobileNavVisible(true);
+    }
+
+    lastScrollY.current = latest;
   });
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+  }, []);
 
   useEffect(() => {
     const sectionElements = mobileNavLinks
@@ -104,7 +123,13 @@ export default function NavBar() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-50 md:px-4 md:pt-4 lg:px-6">
+      <div
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 md:pointer-events-auto md:translate-y-0 md:px-4 md:pt-4 lg:px-6 ${
+          isMobileNavVisible
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-full opacity-0"
+        }`}
+      >
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -167,7 +192,13 @@ export default function NavBar() {
         </motion.nav>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-[60] md:hidden">
+      <div
+        className={`fixed inset-x-0 bottom-0 z-[60] transition-all duration-300 md:hidden ${
+          isMobileNavVisible
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-[calc(100%+1rem)] opacity-0"
+        }`}
+      >
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Caveat, Instrument_Serif, Manrope, Newsreader } from "next/font/google";
-import { GITHUB_REPO_URL } from "./lib/site-links";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -122,7 +121,8 @@ const organizationLd = {
     name: "Kerala, India",
   },
   sameAs: [
-    GITHUB_REPO_URL,
+    "https://github.com/atomrobic/keralacoderscafe-saas",
+    "https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm",
   ],
 };
 
@@ -135,8 +135,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      data-theme="dark"
       className={`${newsreader.variable} ${manrope.variable} ${instrumentSerif.variable} ${caveat.variable} h-full`}
     >
       <head>
@@ -155,7 +153,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="min-h-full bg-kcc-bg text-kcc-text antialiased">
+      <body className="min-h-full bg-kcc-paper text-black antialiased">
         {children}
       </body>
     </html>

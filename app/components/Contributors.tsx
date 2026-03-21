@@ -132,11 +132,11 @@ export default function Contributors() {
                 href={contributor.html_url}
                 target="_blank"
                 className={`group relative flex h-full min-w-0 flex-col items-center gap-3 overflow-hidden rounded-2xl p-4 transition-all 
-                bg-white/[0.02] backdrop-blur-md ring-1
+                bg-[color:var(--ui-surface)] backdrop-blur-md ring-1
                 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]
                 ${featured
-                    ? "ring-[color:var(--ui-accent)]/10 bg-gradient-to-br from-grey-500/[0.01] to-transparent"
-                    : "ring-white/[0.05] hover:ring-white/[0.12]"
+                    ? "ring-[color:var(--ui-accent)]/20 bg-gradient-to-br from-[color:var(--ui-surface-hover)] to-transparent"
+                    : "ring-[color:var(--ui-border-soft)] hover:ring-[color:var(--ui-border-strong)]"
                   }`}
               >
                 {/* Rank */}
@@ -156,7 +156,7 @@ export default function Contributors() {
                   className={`relative h-16 w-16 overflow-hidden rounded-full border 
                   ${featured
                       ? "border-[color:var(--ui-accent)]/30"
-                      : "border-white/[0.08]"
+                      : "border-[color:var(--ui-border-soft)]"
                     }`}
                 >
                   <Image
@@ -199,15 +199,15 @@ export default function Contributors() {
           <Link
             href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
             target="_blank"
-            className="group relative flex h-full min-w-0 flex-col items-center gap-3 overflow-hidden rounded-2xl border border-dashed border-white/[0.15] bg-white/[0.03] backdrop-blur-md p-4 transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:border-white/[0.3] hover:bg-white/[0.06]"
+            className="group relative flex h-full min-w-0 flex-col items-center gap-3 overflow-hidden rounded-2xl border border-dashed border-[color:var(--ui-border-hard)] bg-[color:var(--ui-surface)] backdrop-blur-md p-4 transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:border-[color:var(--ui-border-strong)] hover:bg-[color:var(--ui-surface-hover)]"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-dashed border-white/[0.15] transition-colors group-hover:border-white/[0.3]">
-              <Plus className="h-8 w-8 text-white/[0.4] transition-colors group-hover:text-white/[0.6]" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-dashed border-[color:var(--ui-border-hard)] transition-colors group-hover:border-[color:var(--ui-border-strong)]">
+              <Plus className="h-8 w-8 text-[color:var(--ui-page-text-soft)] transition-colors group-hover:text-[color:var(--ui-page-text-muted)]" />
             </div>
 
             <div className="text-center">
-              <h3 className="text-sm font-semibold text-white/90 transition-colors group-hover:text-white">You Next</h3>
-              <p className="text-[10px] uppercase tracking-wider text-white/[0.4] transition-colors group-hover:text-white/[0.6]">
+              <h3 className="text-sm font-semibold text-[color:var(--ui-page-text)] transition-colors group-hover:text-[color:var(--ui-page-text)]">You Next</h3>
+              <p className="text-[10px] uppercase tracking-wider text-[color:var(--ui-page-text-soft)] transition-colors group-hover:text-[color:var(--ui-page-text-muted)]">
                 Contribute & get featured
               </p>
             </div>

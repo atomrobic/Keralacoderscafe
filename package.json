@@ -2,6 +2,27 @@
   "name": "kcc",
   "version": "0.1.0",
   "private": true,
+  "description": "Community-first website for Kerala Coders Cafe.",
+  "author": "Kerala Coders Cafe Contributors",
+  "license": "MIT",
+  "homepage": "https://kcc.sh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KERALACODERSCAFE/Keralacoderscafe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KERALACODERSCAFE/Keralacoderscafe/issues"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "keywords": [
+    "kerala",
+    "community",
+    "developers",
+    "nextjs",
+    "open-source"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

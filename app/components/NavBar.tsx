@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import KccCupMark from "./KccCupMark";
+import ThemeLogo from "./ThemeLogo";
 import ThemeToggle from "./ThemeToggle";
 import { WHATSAPP_GATE_PATH } from "../lib/site-links";
 
@@ -147,11 +147,11 @@ export default function NavBar() {
               className="flex min-w-0 items-center gap-3"
             >
               <motion.div
-                whileHover={{ rotate: -6, scale: 1.03 }}
+                whileHover={{ scale: 1.03, y: -1 }}
                 transition={{ duration: 0.25 }}
-                className="h-11 w-11 shrink-0 rounded-full"
+                className="flex h-11 w-[3.9rem] shrink-0 items-center"
               >
-                <KccCupMark className="h-full w-full" />
+                <ThemeLogo className="h-7 w-full" />
               </motion.div>
 
               <div className="min-w-0">

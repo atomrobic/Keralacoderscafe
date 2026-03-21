@@ -1,0 +1,49 @@
+name: Feature request
+description: Suggest an improvement for the website or contributor workflow
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share the idea clearly and explain the value it adds to the KCC community.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What gap are you trying to solve?
+      placeholder: It is hard for contributors to ...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the change you would like to see
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Share other approaches you thought about
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact area
+      options:
+        - Community onboarding
+        - Website design
+        - Developer experience
+        - Documentation
+        - Accessibility
+        - Performance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Mockups, references, links, or examples

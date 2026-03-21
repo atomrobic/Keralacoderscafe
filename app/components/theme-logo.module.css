@@ -1,0 +1,27 @@
+.shell {
+  display: inline-grid;
+  align-items: center;
+}
+
+.image {
+  grid-area: 1 / 1;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.logoForLightTheme {
+  display: none;
+}
+
+.logoForDarkTheme {
+  display: block;
+}
+
+:global(html[data-theme="light"]) .logoForLightTheme {
+  display: block;
+}
+
+:global(html[data-theme="light"]) .logoForDarkTheme {
+  display: none;
+}

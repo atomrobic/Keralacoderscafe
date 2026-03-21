@@ -122,7 +122,7 @@ export default function Contributors() {
         </div>
 
         {/* Contributors Grid */}
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <div className="mt-12 grid grid-cols-1 gap-4 min-[380px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {contributors.map((contributor, index) => {
             const featured = getFeatured(contributor.login);
 
@@ -131,7 +131,7 @@ export default function Contributors() {
                 key={contributor.id}
                 href={contributor.html_url}
                 target="_blank"
-                className={`group relative flex flex-col items-center gap-3 rounded-2xl p-4 transition-all 
+                className={`group relative flex h-full min-w-0 flex-col items-center gap-3 overflow-hidden rounded-2xl p-4 transition-all 
                 bg-white/[0.02] backdrop-blur-md ring-1
                 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]
                 ${featured
@@ -168,22 +168,22 @@ export default function Contributors() {
                 </div>
 
                 {/* Info */}
-                <div className="text-center">
-                  <h3 className="truncate text-sm font-semibold">
+                <div className="flex w-full min-w-0 flex-col items-center text-center">
+                  <h3 className="w-full truncate text-sm font-semibold">
                     {contributor.login}
                   </h3>
 
                   {featured?.role ? (
-                    <>
-                      <p className="text-[10px] uppercase tracking-wider text-[color:var(--ui-accent)]">
+                    <div className="w-full">
+                      <p className="w-full truncate text-[10px] uppercase tracking-wider text-[color:var(--ui-accent)]">
                         {featured.role}
                       </p>
-                      <p className="text-xs text-[color:var(--ui-page-text-soft)]">
+                      <p className="w-full truncate text-xs text-[color:var(--ui-page-text-soft)]">
                         {contributor.contributions} commits
                       </p>
-                    </>
+                    </div>
                   ) : (
-                    <p className="text-xs text-[color:var(--ui-page-text-soft)]">
+                    <p className="w-full truncate text-xs text-[color:var(--ui-page-text-soft)]">
                       {contributor.contributions} commits
                     </p>
                   )}
@@ -199,7 +199,7 @@ export default function Contributors() {
           <Link
             href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
             target="_blank"
-            className="group relative flex flex-col items-center gap-3 rounded-2xl border border-dashed border-white/[0.15] bg-white/[0.03] backdrop-blur-md p-4 transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:border-white/[0.3] hover:bg-white/[0.06]"
+            className="group relative flex h-full min-w-0 flex-col items-center gap-3 overflow-hidden rounded-2xl border border-dashed border-white/[0.15] bg-white/[0.03] backdrop-blur-md p-4 transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:border-white/[0.3] hover:bg-white/[0.06]"
           >
             <div className="flex h-16 w-16 items-center justify-center rounded-full border border-dashed border-white/[0.15] transition-colors group-hover:border-white/[0.3]">
               <Plus className="h-8 w-8 text-white/[0.4] transition-colors group-hover:text-white/[0.6]" />

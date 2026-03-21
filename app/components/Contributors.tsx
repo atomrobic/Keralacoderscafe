@@ -47,26 +47,9 @@ export default function Contributors() {
         if (!ignore && Array.isArray(contributorsData)) {
           setConfig(configData);
 
+          // Sort by contributions descending
           const sortedData = contributorsData.sort(
-            (a: Contributor, b: Contributor) => {
-              const aFeatured = configData.featured.find(
-                (f: FeaturedConfig) =>
-                  f.username.toLowerCase() === a.login.toLowerCase()
-              );
-              const bFeatured = configData.featured.find(
-                (f: FeaturedConfig) =>
-                  f.username.toLowerCase() === b.login.toLowerCase()
-              );
-
-              if (aFeatured && bFeatured) {
-                return aFeatured.position - bFeatured.position;
-              }
-
-              if (aFeatured && !bFeatured) return -1;
-              if (!aFeatured && bFeatured) return 1;
-
-              return b.contributions - a.contributions;
-            }
+            (a: Contributor, b: Contributor) => b.contributions - a.contributions
           );
 
           setContributors(sortedData);
@@ -125,6 +108,7 @@ export default function Contributors() {
         <div className="mt-12 grid grid-cols-1 gap-4 min-[380px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {contributors.map((contributor, index) => {
             const featured = getFeatured(contributor.login);
+            const isTop = index === 0;
 
             return (
               <Link
@@ -139,8 +123,9 @@ export default function Contributors() {
                     : "ring-[color:var(--ui-border-soft)] hover:ring-[color:var(--ui-border-strong)]"
                   }`}
               >
-                {/* Rank */}
-                <div className="absolute right-3 top-3 text-xs text-[color:var(--ui-page-text-soft)]">
+                {/* Ranking Tag (Premium look for top 1) */}
+                <div className={`absolute right-3 top-3 text-[10px] font-bold tracking-wider 
+                  ${isTop ? "text-yellow-500" : "text-[color:var(--ui-page-text-soft)]"}`}>
                   #{String(index + 1).padStart(2, "0")}
                 </div>
 

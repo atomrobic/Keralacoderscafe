@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   ArrowUpRight,
   FolderKanban,
@@ -39,11 +40,55 @@ const mobileNavLinks = [
 ];
 
 export default function NavBar() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState(
+    isHomePage ? "about" : "contributors",
+  );
   const [isMobileNavVisible, setIsMobileNavVisible] = useState(true);
   const lastScrollY = useRef(0);
   const { scrollY } = useScroll();
+
+  const resolvedNavLinks = isHomePage
+    ? navLinks
+    : [
+        { name: "About", href: "/#about" },
+        { name: "Contributors", href: "/contributors" },
+        { name: "Projects", href: "/#projects" },
+        { name: "Join", href: "/#join" },
+      ];
+
+  const resolvedMobileNavLinks = isHomePage
+    ? mobileNavLinks
+    : [
+        {
+          name: "About",
+          href: "/#about",
+          icon: Sparkles,
+          sectionId: "about",
+        },
+        {
+          name: "People",
+          href: "/contributors",
+          icon: Users2,
+          sectionId: "contributors",
+        },
+        {
+          name: "Projects",
+          href: "/#projects",
+          icon: FolderKanban,
+          sectionId: "projects",
+        },
+        {
+          name: "Join",
+          href: "/#join",
+          icon: MessageCircle,
+          sectionId: "join",
+        },
+      ];
+
+  const currentActiveSection = isHomePage ? activeSection : "contributors";
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY.current;
@@ -67,6 +112,10 @@ export default function NavBar() {
   }, []);
 
   useEffect(() => {
+    if (!isHomePage) {
+      return;
+    }
+
     const sectionElements = mobileNavLinks
       .map((link) => ({
         id: link.sectionId,
@@ -119,7 +168,7 @@ export default function NavBar() {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
-  }, []);
+  }, [isHomePage]);
 
   return (
     <>
@@ -165,7 +214,7 @@ export default function NavBar() {
             </Link>
 
             <div className="hidden items-center gap-8 md:flex">
-              {navLinks.map((link) => (
+              {resolvedNavLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
@@ -206,9 +255,9 @@ export default function NavBar() {
           className="w-full border-t border-[color:var(--ui-border-strong)] bg-[color:var(--ui-nav-bg-scrolled)] px-2 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-12px_36px_rgba(0,0,0,0.2)] backdrop-blur-xl"
         >
           <div className="grid grid-cols-4 gap-1">
-            {mobileNavLinks.map((link) => {
+            {resolvedMobileNavLinks.map((link) => {
               const Icon = link.icon;
-              const isActive = activeSection === link.sectionId;
+              const isActive = currentActiveSection === link.sectionId;
 
               return (
                 <Link

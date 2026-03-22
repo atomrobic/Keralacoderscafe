@@ -18,8 +18,6 @@ import { useContributorsData } from "../lib/use-contributors-data";
 import { GITHUB_REPO_URL } from "../lib/site-links";
 
 const numberFormatter = new Intl.NumberFormat("en-IN");
-const CONTRIBUTOR_HOVER_GIFS = ["/Gif/catwithplate.gif", "/Gif/dance.gif"];
-const YOU_NEXT_HOVER_GIF = "/Gif/welcome.gif";
 
 function getUsernameClasses(username: string) {
   if (username.length > 20) {
@@ -32,69 +30,6 @@ function getUsernameClasses(username: string) {
 
   return "text-[1.08rem] leading-[1.02]";
 }
-
-function getContributorHoverGif(index: number) {
-  return CONTRIBUTOR_HOVER_GIFS[index % CONTRIBUTOR_HOVER_GIFS.length];
-}
-
-function ContributorHoverBack({
-  accentTone,
-  index,
-}: {
-  accentTone: string;
-  index: number;
-}) {
-  return (
-    <div className="contributors-flip-face contributors-flip-back overflow-hidden rounded-[0.95rem] border-2 border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] shadow-[var(--contributors-card-shadow)] group-hover:shadow-[var(--contributors-card-shadow-hover)]">
-      <div className={`absolute inset-x-0 top-0 h-2 ${accentTone}`} />
-
-      <Image
-        src={getContributorHoverGif(index)}
-        alt=""
-        aria-hidden="true"
-        fill
-        unoptimized
-        sizes="(min-width: 1536px) 220px, (min-width: 1280px) 240px, (min-width: 768px) 220px, 100vw"
-        className="object-cover"
-      />
-
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,16,16,0.02)_0%,rgba(16,16,16,0.14)_45%,rgba(16,16,16,0.5)_100%)]" />
-
-      <div className="relative flex h-full items-start justify-start p-4">
-        <div className="inline-flex items-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] bg-[#ffd84d] px-3 py-1 text-[0.68rem] font-black tracking-[0.18em] text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-accent-shadow)]">
-          LOL
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function YouNextHoverBack() {
-  return (
-    <div className="contributors-flip-face contributors-flip-back overflow-hidden rounded-[0.95rem] border-2 border-dashed border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] shadow-[var(--contributors-card-shadow)] group-hover:shadow-[var(--contributors-card-shadow-hover)]">
-      <div className="absolute inset-x-0 top-0 h-2 bg-[#e9e3d8]" />
-
-      <Image
-        src={YOU_NEXT_HOVER_GIF}
-        alt=""
-        aria-hidden="true"
-        fill
-        unoptimized
-        sizes="(min-width: 1536px) 220px, (min-width: 1280px) 240px, (min-width: 768px) 220px, 100vw"
-        className="object-cover"
-      />
-
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,16,16,0.02)_0%,rgba(16,16,16,0.14)_45%,rgba(16,16,16,0.5)_100%)]" />
-
-      <div className="relative flex h-full items-start justify-start p-4">
-        <div className="inline-flex items-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] bg-[#ffd84d] px-3 py-1 text-[0.68rem] font-black tracking-[0.18em] text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-accent-shadow)]">
-          LOL
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ContributorsSkeleton() {
   return (
     <div className="mt-12 grid grid-cols-1 gap-4 min-[460px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -204,54 +139,46 @@ export default function Contributors() {
                       href={contributor.html_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="contributors-flip-scene group relative block h-[15.6rem] transition-transform duration-200 hover:-translate-x-1 hover:-translate-y-1"
+                      className="group relative flex h-[15.6rem] flex-col overflow-hidden rounded-[0.95rem] border-2 border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] px-4 pb-4 pt-5 text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-card-shadow)] transition-transform duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[var(--contributors-card-shadow-hover)]"
                     >
-                      <div className="contributors-flip-inner h-[15.6rem]">
-                        <div className="contributors-flip-face contributors-flip-front flex h-full flex-col overflow-hidden rounded-[0.95rem] border-2 border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] px-4 pb-4 pt-5 text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-card-shadow)] group-hover:shadow-[var(--contributors-card-shadow-hover)]">
-                          <div className={`absolute inset-x-0 top-0 h-2 ${accentTone}`} />
+                      <div className={`absolute inset-x-0 top-0 h-2 ${accentTone}`} />
 
-                          <div className="flex items-start justify-between gap-3 pt-1">
-                            <div className="inline-flex h-7 w-7 items-center justify-center rounded-[0.45rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
-                              <Pin className="h-3.5 w-3.5" />
-                            </div>
-
-                            <div className={`inline-flex h-8 min-w-14 items-center justify-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] px-3 text-[0.68rem] font-black tracking-[0.18em] ${accentTone}`}>
-                              #{String(index + 1).padStart(2, "0")}
-                            </div>
-                          </div>
-
-                          <div className={`mx-auto mt-4 flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[0.9rem] border-2 border-[color:var(--color-kcc-ink)] ${accentTone}`}>
-                            <div className="relative h-[4.15rem] w-[4.15rem] overflow-hidden rounded-[0.7rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
-                              <Image
-                                src={contributor.avatar_url}
-                                alt={contributor.login}
-                                fill
-                                sizes="66px"
-                                className="object-cover"
-                              />
-                            </div>
-                          </div>
-
-                          <div className="mt-4 flex min-h-[5.2rem] flex-col items-center justify-start text-center">
-                            <h3
-                              className={`max-w-full font-black tracking-[-0.05em] text-[color:var(--color-kcc-ink)] ${getUsernameClasses(contributor.login)}`}
-                            >
-                              {contributor.login}
-                            </h3>
-
-                            <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-black/78">
-                              {featuredContributor?.role ?? "Community Contributor"}
-                            </p>
-
-                            <p className="mt-1 text-sm font-medium text-black/72">
-                              {numberFormatter.format(contributor.contributions)} commits
-                            </p>
-                          </div>
+                      <div className="flex items-start justify-between gap-3 pt-1">
+                        <div className="inline-flex h-7 w-7 items-center justify-center rounded-[0.45rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
+                          <Pin className="h-3.5 w-3.5" />
                         </div>
-                        <ContributorHoverBack
-                          accentTone={accentTone}
-                          index={index}
-                        />
+
+                        <div className={`inline-flex h-8 min-w-14 items-center justify-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] px-3 text-[0.68rem] font-black tracking-[0.18em] ${accentTone}`}>
+                          #{String(index + 1).padStart(2, "0")}
+                        </div>
+                      </div>
+
+                      <div className={`mx-auto mt-4 flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[0.9rem] border-2 border-[color:var(--color-kcc-ink)] ${accentTone}`}>
+                        <div className="relative h-[4.15rem] w-[4.15rem] overflow-hidden rounded-[0.7rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
+                          <Image
+                            src={contributor.avatar_url}
+                            alt={contributor.login}
+                            fill
+                            sizes="66px"
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex min-h-[5.2rem] flex-col items-center justify-start text-center">
+                        <h3
+                          className={`max-w-full font-black tracking-[-0.05em] text-[color:var(--color-kcc-ink)] ${getUsernameClasses(contributor.login)}`}
+                        >
+                          {contributor.login}
+                        </h3>
+
+                        <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-black/78">
+                          {featuredContributor?.role ?? "Community Contributor"}
+                        </p>
+
+                        <p className="mt-1 text-sm font-medium text-black/72">
+                          {numberFormatter.format(contributor.contributions)} commits
+                        </p>
                       </div>
                     </Link>
                   );
@@ -261,41 +188,36 @@ export default function Contributors() {
                   href={GITHUB_REPO_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="contributors-flip-scene group relative block h-[15.6rem] transition-transform duration-200 hover:-translate-x-1 hover:-translate-y-1"
+                  className="group relative flex h-[15.6rem] flex-col overflow-hidden rounded-[0.95rem] border-2 border-dashed border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] px-4 pb-4 pt-5 text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-card-shadow)] transition-transform duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[var(--contributors-card-shadow-hover)]"
                 >
-                  <div className="contributors-flip-inner h-[15.6rem]">
-                    <div className="contributors-flip-face contributors-flip-front flex h-full flex-col overflow-hidden rounded-[0.95rem] border-2 border-dashed border-[color:var(--color-kcc-ink)] bg-[color:var(--color-kcc-paper)] px-4 pb-4 pt-5 text-[color:var(--color-kcc-ink)] shadow-[var(--contributors-card-shadow)] group-hover:shadow-[var(--contributors-card-shadow-hover)]">
-                      <div className="absolute inset-x-0 top-0 h-2 bg-[#e9e3d8]" />
+                  <div className="absolute inset-x-0 top-0 h-2 bg-[#e9e3d8]" />
 
-                      <div className="flex items-start justify-between gap-3 pt-1">
-                        <div className="inline-flex h-7 w-7 items-center justify-center rounded-[0.45rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
-                          <Pin className="h-3.5 w-3.5" />
-                        </div>
-
-                        <div className="inline-flex h-8 min-w-14 items-center justify-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80 px-3 text-[0.68rem] font-black tracking-[0.18em]">
-                          NEXT
-                        </div>
-                      </div>
-
-                      <div className="mx-auto mt-4 flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[0.9rem] border-2 border-dashed border-[color:var(--color-kcc-ink)] bg-white/75">
-                        <Plus className="h-7 w-7 text-black/60 transition-transform duration-200 group-hover:scale-105" />
-                      </div>
-
-                      <div className="mt-4 flex flex-1 flex-col items-center justify-start text-center">
-                        <h3 className="max-w-full text-[1.08rem] font-black tracking-[-0.05em] text-[color:var(--color-kcc-ink)]">
-                          You Next
-                        </h3>
-
-                        <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-black/78">
-                          Open Source Builder
-                        </p>
-
-                        <p className="mt-1 text-sm font-medium text-black/72">
-                          Contribute & get featured
-                        </p>
-                      </div>
+                  <div className="flex items-start justify-between gap-3 pt-1">
+                    <div className="inline-flex h-7 w-7 items-center justify-center rounded-[0.45rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80">
+                      <Pin className="h-3.5 w-3.5" />
                     </div>
-                    <YouNextHoverBack />
+
+                    <div className="inline-flex h-8 min-w-14 items-center justify-center rounded-[0.55rem] border-2 border-[color:var(--color-kcc-ink)] bg-white/80 px-3 text-[0.68rem] font-black tracking-[0.18em]">
+                      NEXT
+                    </div>
+                  </div>
+
+                  <div className="mx-auto mt-4 flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[0.9rem] border-2 border-dashed border-[color:var(--color-kcc-ink)] bg-white/75">
+                    <Plus className="h-7 w-7 text-black/60 transition-transform duration-200 group-hover:scale-105" />
+                  </div>
+
+                  <div className="mt-4 flex flex-1 flex-col items-center justify-start text-center">
+                    <h3 className="max-w-full text-[1.08rem] font-black tracking-[-0.05em] text-[color:var(--color-kcc-ink)]">
+                      You Next
+                    </h3>
+
+                    <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-black/78">
+                      Open Source Builder
+                    </p>
+
+                    <p className="mt-1 text-sm font-medium text-black/72">
+                      Contribute & get featured
+                    </p>
                   </div>
                 </Link>
               </div>

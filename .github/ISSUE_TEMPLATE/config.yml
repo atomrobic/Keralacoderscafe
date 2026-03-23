@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community support
+    url: https://kcc.sh/join/whatsapp
+    about: Join Kerala Coders Cafe for general community questions and discussion.
+  - name: Security policy
+    url: https://github.com/KERALACODERSCAFE/Keralacoderscafe/security/policy
+    about: Please follow the private reporting guidance for vulnerabilities.

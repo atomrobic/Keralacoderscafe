@@ -54,7 +54,7 @@ const projects = [
     completion: 0.32
   },
   {
-    title: "Developers Blog",
+    title: "Developers Blogs",
     description: "Articles, tutorials, and insights written by Kerala developers. Share your knowledge.",
     color: "hsla(0, 3%, 8%, 0.58)",
     background: "grass-bottom",

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { Newsreader, Manrope } from "next/font/google";
+import { Newsreader, Manrope, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import SmoothScroll from "./components/SmoothScroll";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const newsreader = Newsreader({
   variable: "--font-newsreader",
@@ -121,7 +125,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${manrope.variable} h-full`}
+      className={cn("h-full", newsreader.variable, manrope.variable, "font-sans", geist.variable)}
     >
       <head>
         {/* Google Icons */}
@@ -141,7 +145,9 @@ export default function RootLayout({
 
       <body className="min-h-full bg-black text-white antialiased">
         <div className="glow-overlay pointer-events-none" />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

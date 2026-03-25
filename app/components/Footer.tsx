@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { Github, MessageCircle } from "lucide-react";
+import PlugConnectedIcon from "@/components/ui/plug-connected-icon";
+import GithubIcon from "@/components/ui/github-icon";
+import WhatsappIcon from "@/components/ui/whatsapp-icon";
+import MessageCircleIcon from "@/components/ui/message-circle-icon";
 
 const quickLinks = ["About Us", "Contributors", "Projects", "GitHub", "WhatsApp"];
 const quickLinksHrefs = [
@@ -31,26 +36,26 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
-                target="_blank"
-                rel="noopener"
-                className="text-kcc-text-dim hover:text-kcc-gold transition-colors"
-                aria-label="GitHub"
-              >
-                <Github size={20} />
-              </Link>
-              <Link
-                href="https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
-                target="_blank"
-                rel="noopener"
-                className="text-kcc-text-dim hover:text-kcc-gold transition-colors"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle size={20} />
-              </Link>
+              href="https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
+              target="_blank"
+              rel="noopener"
+              className="text-kcc-text-dim hover:text-kcc-gold transition-colors block group"
+              aria-label="WhatsApp"
+            >
+              <WhatsappIcon size={24} className="group-hover:stroke-kcc-gold" />
+            </Link>
+            <Link
+              href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
+              target="_blank"
+              rel="noopener"
+              className="text-kcc-text-dim hover:text-kcc-gold transition-colors block group"
+              aria-label="GitHub"
+            >
+              <GithubIcon size={24} className="group-hover:stroke-kcc-gold" />
+            </Link>
             </div>
           </div>
-
+ 
           {/* Quick Links section */}
           <div>
             <h3 className="text-xs tracking-widest text-kcc-gold uppercase mb-6 font-semibold">
@@ -63,10 +68,10 @@ export default function Footer() {
                     href={quickLinksHrefs[i]}
                     target={quickLinksHrefs[i].startsWith("http") ? "_blank" : undefined}
                     rel={quickLinksHrefs[i].startsWith("http") ? "noopener" : undefined}
-                    className="text-sm text-kcc-text-dim hover:text-kcc-accent transition-colors flex items-center gap-2"
+                    className="text-sm text-kcc-text-dim hover:text-kcc-accent transition-colors flex items-center gap-2 group"
                   >
-                    {label === "GitHub" && <Github size={14} />}
-                    {label === "WhatsApp" && <MessageCircle size={14} />}
+                    {label === "GitHub" && <GithubIcon size={14} className="group-hover:stroke-kcc-accent" />}
+                    {label === "WhatsApp" && <WhatsappIcon size={14} className="group-hover:stroke-kcc-accent" />}
                     {label}
                   </Link>
                 </li>

@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import PlugConnectedIcon from "@/components/ui/plug-connected-icon";
+import GithubIcon from "@/components/ui/github-icon";
+import LetterKIcon from "@/components/ui/letter-k-icon";
+import LetterCIcon from "@/components/ui/letter-c-icon";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +24,12 @@ export default function NavBar() {
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-3xl md:text-4xl font-black tracking-tight text-kcc-gold"
-              style={{ fontFamily: "var(--font-newsreader)" }}
+              className="flex items-center gap-1 group"
+              aria-label="Home"
             >
-              KCC
+              <LetterKIcon size={32} className="text-kcc-gold" />
+              <LetterCIcon size={32} className="text-kcc-gold -ml-1" />
+              <LetterCIcon size={32} className="text-kcc-gold -ml-1" />
             </Link>
           </div>
 
@@ -45,20 +51,19 @@ export default function NavBar() {
               href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
               target="_blank"
               rel="noopener"
-              className="text-kcc-text hover:text-kcc-gold transition-colors hidden sm:block"
+              className="text-kcc-text-dim hover:text-kcc-gold transition-colors hidden sm:block group"
+              aria-label="GitHub"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "20px" }}>code</span>
+              <GithubIcon size={24} className="group-hover:stroke-kcc-gold" />
             </Link>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-kcc-text hover:text-kcc-gold transition-colors p-1"
+              className="md:hidden text-kcc-text hover:text-kcc-gold transition-colors p-1 group"
               aria-label="Toggle menu"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: "28px" }}>
-                {isOpen ? "close" : "menu"}
-              </span>
+              <PlugConnectedIcon size={28} className="group-hover:stroke-kcc-gold" />
             </button>
           </div>
         </div>
@@ -112,9 +117,9 @@ export default function NavBar() {
               href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
               target="_blank"
               rel="noopener"
-              className="flex items-center gap-3 text-kcc-text-dim hover:text-kcc-gold transition-colors"
+              className="flex items-center gap-3 text-kcc-text-dim hover:text-kcc-gold transition-colors font-semibold group"
             >
-              <span className="material-symbols-outlined">code</span>
+              <GithubIcon size={20} className="group-hover:stroke-kcc-gold" />
               <span className="text-xs tracking-widest uppercase">GitHub</span>
             </Link>
           </div>

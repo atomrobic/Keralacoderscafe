@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import PlugConnectedIcon from "@/components/ui/plug-connected-icon";
 
 const projects = [
   {
@@ -204,7 +205,7 @@ export default function Projects() {
                 <div className="card__category">
                   <Icon name="star-8" size={56} className="text-white/20" />
                   <span className="card__category-icon" style={{ color: project.color }}>
-                    <Icon name={project.icon} size={24} />
+                    <PlugConnectedIcon size={24} className="group-hover:stroke-current" />
                   </span>
                 </div>
               </div>

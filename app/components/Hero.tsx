@@ -3,6 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import PlugConnectedIcon from "@/components/ui/plug-connected-icon";
+import DownChevron from "@/components/ui/down-chevron";
+import GithubIcon from "@/components/ui/github-icon";
+import WhatsappIcon from "@/components/ui/whatsapp-icon";
+
 export default function Hero() {
   return (
     <header className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -22,7 +27,7 @@ export default function Hero() {
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <div className="text-xs tracking-[0.5em] text-kcc-gold uppercase mb-6 animate-fade-in-up">
-          KERALA'S TECH COMMUNITY
+          KERALA&apos;S TECH COMMUNITY
         </div>
 
         <h1
@@ -43,25 +48,25 @@ export default function Hero() {
             href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
             target="_blank"
             rel="noopener"
-            className="bg-kcc-accent text-kcc-bg px-10 py-4 text-xs tracking-widest uppercase font-semibold hover:bg-kcc-gold transition-all duration-300 inline-flex items-center justify-center gap-2"
+            className="bg-kcc-accent text-kcc-bg px-10 py-4 text-xs tracking-widest uppercase font-semibold hover:bg-kcc-gold transition-all duration-300 inline-flex items-center justify-center gap-2 group"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>code</span>
+            <GithubIcon size={16} color="black" className="group-hover:stroke-black" />
             View on GitHub
           </Link>
           <Link
             href="https://chat.whatsapp.com/Kd3tVwJfjjh0HRZtoYfxcm"
             target="_blank"
             rel="noopener"
-            className="border border-kcc-border text-kcc-accent px-10 py-4 text-xs tracking-widest uppercase font-semibold hover:bg-white/5 hover:border-kcc-gold transition-all duration-300 inline-flex items-center justify-center gap-2"
+            className="border border-kcc-border text-kcc-accent px-10 py-4 text-xs tracking-widest uppercase font-semibold hover:bg-white/5 hover:border-kcc-gold transition-all duration-300 inline-flex items-center justify-center gap-2 group"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>chat</span>
+            <WhatsappIcon size={16} className="group-hover:stroke-kcc-gold" />
             Join WhatsApp
           </Link>
         </div>
 
         <div className="mt-16 animate-fade-in-up delay-500">
           <a href="#about" className="text-kcc-text-dim hover:text-kcc-gold transition-colors inline-block">
-            <span className="material-symbols-outlined animate-bounce" style={{ fontSize: "40px" }}>keyboard_arrow_down</span>
+            <DownChevron size={40} />
           </a>
         </div>
       </div>

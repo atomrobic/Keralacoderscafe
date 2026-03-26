@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap";
+@import "tailwindcss";
 
 @theme {
   --font-headline: var(--font-newsreader);

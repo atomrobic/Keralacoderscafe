@@ -6,7 +6,11 @@ import { ArrowLeft, CheckCircle2, MessageCircle, ChevronRight, XCircle, Loader2,
 import { whatsappGateTaskList, LanguageTask, majorStates } from "../data/whatsappGate";
 import { getCommunityInvite } from "../actions/community";
 
-export default function JoinGate() {
+interface JoinGateProps {
+  onStatusChange?: (isSubmitted: boolean) => void;
+}
+
+export default function JoinGate({ onStatusChange }: JoinGateProps) {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedTask, setSelectedTask] = useState<LanguageTask | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -25,22 +29,25 @@ export default function JoinGate() {
     if ("link" in res) {
       setInviteLink(res.link || null);
       setIsSubmitted(true);
+      onStatusChange?.(true);
     }
     setIsSubmitting(false);
   };
 
   const handleSubmit = async () => {
     if (!selectedTask || !selectedState) return;
-    
+
     setIsSubmitting(true);
     const res = await getCommunityInvite(selectedState, selectedTask.key, answers);
-    
+
     if ("link" in res) {
       setInviteLink(res.link || null);
       setIsSubmitted(true);
+      onStatusChange?.(true);
     } else if ("error" in res) {
       setError(res.error || "Verification failed.");
       setIsSubmitted(true);
+      onStatusChange?.(true);
     }
     setIsSubmitting(false);
   };
@@ -50,6 +57,7 @@ export default function JoinGate() {
     setSelectedTask(null);
     setAnswers({});
     setIsSubmitted(false);
+    onStatusChange?.(false);
     setInviteLink(null);
     setError(null);
   };
@@ -61,7 +69,7 @@ export default function JoinGate() {
         <Link href="/" className="mb-8 inline-flex items-center gap-2 font-black uppercase tracking-tight hover:underline">
           <ArrowLeft className="h-4 w-4" /> Back Home
         </Link>
-        
+
         <div className="border-4 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h1 className="text-4xl font-black uppercase tracking-tight text-black leading-none">
             Where are you from?
@@ -101,7 +109,7 @@ export default function JoinGate() {
             <p className="mt-4 text-lg font-bold text-black/80">
               Our WhatsApp groups are currently exclusive to Kerala residents. However, everyone is welcome in our global Telegram!
             </p>
-            
+
             {inviteLink ? (
               <Link
                 href={inviteLink}
@@ -139,7 +147,7 @@ export default function JoinGate() {
         <button onClick={reset} className="mb-8 inline-flex items-center gap-2 font-black uppercase tracking-tight hover:underline">
           <ArrowLeft className="h-4 w-4" /> Change Location
         </button>
-        
+
         <div className="border-4 border-black bg-white p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           <h1 className="text-4xl font-black uppercase tracking-tight text-black leading-none">
             Welcome, Keralite!
@@ -185,7 +193,7 @@ export default function JoinGate() {
               <p className="mt-4 text-lg font-bold text-black/80">
                 You're in! Join our verified Kerala WhatsApp community below.
               </p>
-              
+
               <Link
                 href={inviteLink || "#"}
                 target="_blank"
@@ -193,7 +201,7 @@ export default function JoinGate() {
                 className="mt-8 inline-flex h-16 w-full items-center justify-center gap-3 border-3 border-black bg-black px-8 text-lg font-black uppercase text-white shadow-[6px_6px_0px_0px_rgba(37,211,102,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(37,211,102,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
               >
                 <MessageCircle className="h-5 w-5 stroke-[3]" />
-                Join Kerala Chapter (WhatsApp)
+                Join (WhatsApp)
               </Link>
             </div>
           ) : (
@@ -205,7 +213,7 @@ export default function JoinGate() {
               <p className="mt-4 text-lg font-bold text-black/80">
                 {error || "Verification failed. Please try again to unlock the link!"}
               </p>
-              
+
               <button
                 onClick={reset}
                 className="mt-8 inline-flex h-14 w-full items-center justify-center gap-2 border-3 border-black bg-kcc-gold font-black uppercase text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-1px] hover:translate-y-[-1px] transition-all"
@@ -253,11 +261,10 @@ export default function JoinGate() {
                   <button
                     key={option}
                     onClick={() => handleOptionSelect(q.id, option)}
-                    className={`border-3 p-4 text-left font-bold transition-all ${
-                      answers[q.id] === option
+                    className={`border-3 p-4 text-left font-bold transition-all ${answers[q.id] === option
                         ? "border-black bg-kcc-green shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] translate-x-[-1px] translate-y-[-1px]"
                         : "border-black/10 bg-white hover:border-black/30"
-                    }`}
+                      }`}
                   >
                     {option}
                   </button>

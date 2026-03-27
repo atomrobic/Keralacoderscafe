@@ -120,7 +120,7 @@ export default function Hero() {
           {/* ─── NEWSPAPER + STAMP COLLECTION ─── */}
           <div className="relative mx-auto w-full max-w-[520px] animate-fade-in delay-200 flex flex-col gap-6 lg:self-start">
             <TerminalCard
-              command={`git clone https://github.com/atomrobic/Keralacoderscafe.git
+              command={`git clone https://github.com/Keralacoderscafe.git
 cd Keralacoderscafe
 npm install
 npm run dev`}

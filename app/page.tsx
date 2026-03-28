@@ -1,4 +1,3 @@
-import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Mission from "./components/Mission";
@@ -11,7 +10,6 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <main className="relative z-10">
-      <NavBar />
       <Hero />
       <Marquee />
       <Mission />

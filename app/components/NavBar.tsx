@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import KccCupMark from "./KccCupMark";
 
 const navLinks = [
@@ -14,70 +15,89 @@ const navLinks = [
 ];
 
 export default function NavBar() {
-  const [activeSection, setActiveSection] = useState("Home");
+  const pathname = usePathname();
+  // Ensure the initial state correctly reflects the current path to avoid hydration mismatch jumps
+  const [activeSection, setActiveSection] = useState(() => {
+    const defaultLink = navLinks.find(link => link.href === pathname);
+    return defaultLink ? defaultLink.name : "Home";
+  });
+  
   const [isVisible, setIsVisible] = useState(true);
   const isClickScroll = useRef(false);
+  const lastScrollY = useRef(0);
 
+  // Effect 1: Handle strict scroll-spy and hide-navbar behavior
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    lastScrollY.current = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Hide-on-scroll logic (disabled during programmatic nav clicks)
+      // Hide-on-scroll logic
       if (!isClickScroll.current) {
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
           setIsVisible(false);
-        } else if (currentScrollY < lastScrollY) {
+        } else if (currentScrollY < lastScrollY.current) {
           setIsVisible(true);
         }
       }
+      lastScrollY.current = currentScrollY;
 
-      lastScrollY = currentScrollY;
+      // Active Section Tracking (Only when on the Homepage!)
+      if (window.location.pathname === "/") {
+        const sections = navLinks.map(link => {
+          const hashIndex = link.href.indexOf("#");
+          const id = hashIndex !== -1 ? link.href.substring(hashIndex + 1) : "";
+          const element = id ? document.getElementById(id) : (link.name === "Home" ? document.body : null);
+          return { name: link.name, element };
+        });
 
-      // Section tracking logic
-      const sections = navLinks.map(link => {
-        const hashIndex = link.href.indexOf("#");
-        const id = hashIndex !== -1 ? link.href.substring(hashIndex + 1) : "";
-        const element = id ? document.getElementById(id) : document.body;
-        return { name: link.name, element };
-      });
-
-      // Find which section is currently in view
-      const scrollPosition = window.scrollY + 200; // Increased offset for better detection
-
-      let foundSection = "Home";
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section.element) {
-          const rect = section.element.getBoundingClientRect();
-          const offsetTop = rect.top + window.scrollY;
-          if (scrollPosition >= offsetTop) {
-            foundSection = section.name;
-            break;
+        const scrollPosition = window.scrollY + 200;
+        let foundSection = "Home";
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = sections[i];
+          if (section.element) {
+            const rect = section.element.getBoundingClientRect();
+            if (scrollPosition >= rect.top + window.scrollY) {
+              foundSection = section.name;
+              break;
+            }
           }
         }
-      }
-
-      if (!isClickScroll.current) {
-        setActiveSection(foundSection);
+        if (!isClickScroll.current) {
+          setActiveSection(foundSection);
+        }
       }
     };
 
-    // Initial check
-    handleScroll();
-
-    // Add scroll listener
+    // Attach once
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (name: string) => {
+  // Effect 2: Force active link whenever pathname changes, ensuring it stays matched instantly
+  useEffect(() => {
+    if (pathname !== "/") {
+      const activeLink = navLinks.find(link => link.href === pathname);
+      if (activeLink) {
+        setActiveSection(activeLink.name);
+      }
+    }
+  }, [pathname]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, name: string) => {
+    // If clicking a hash link from a different page, bypass Next.js link to ensure we actually navigate and scroll properly
+    if (href.startsWith("/#") && pathname !== "/") {
+      e.preventDefault();
+      window.location.href = href;
+      return;
+    }
+
     setActiveSection(name);
     isClickScroll.current = true;
     setTimeout(() => {
       isClickScroll.current = false;
-    }, 1200); // Slightly longer wait for smooth scroll
+    }, 1200);
   };
 
   return (
@@ -108,7 +128,7 @@ export default function NavBar() {
                 <div key={link.name} className="flex items-center gap-1.5 sm:gap-2">
                   <Link
                     href={link.href}
-                    onClick={() => handleNavClick(link.name)}
+                    onClick={(e) => handleNavClick(e, link.href, link.name)}
                     className={`text-xs sm:text-sm font-bold uppercase tracking-tight transition-colors ${activeSection === link.name
                       ? "text-black"
                       : "text-black/60 hover:text-black"

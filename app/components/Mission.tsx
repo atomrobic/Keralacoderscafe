@@ -21,7 +21,7 @@ const pillars = [
 
 export default function Mission() {
   return (
-    <section id="about" className="px-6 py-28 md:px-12 bg-white border-b-4 border-black">
+    <section id="about" className="scroll-mt-24 px-6 py-28 md:px-12 bg-white border-b-4 border-black">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-20 lg:grid-cols-[minmax(0,1fr)_minmax(380px,0.95fr)]">
           <div>

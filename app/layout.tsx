@@ -136,6 +136,9 @@ const organizationLd = {
 
 import FloatingCTA from "./components/FloatingCTA";
 import SmoothScroll from "./components/SmoothScroll";
+import NavBar from "./components/NavBar";
+import PageLoader from "./components/PageLoader";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -158,6 +161,10 @@ export default function RootLayout({
       </head>
 
       <body className="min-h-full bg-kcc-paper text-black antialiased">
+        <Suspense fallback={null}>
+          <PageLoader />
+        </Suspense>
+        <NavBar />
         <SmoothScroll>
           {children}
           <FloatingCTA />

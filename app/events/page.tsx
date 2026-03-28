@@ -1,189 +1,266 @@
 "use client";
 
 import Link from "next/link";
-import NavBar from "@/app/components/NavBar";
 
-export default function EventsPage() {
+const REPOS = [
+  {
+    id: 1,
+    name: "used-book-marketplace",
+    submittedBy: "Leo Joseph Sibichen",
+    description:
+      "A platform that helps readers get their favourite books at low prices, and helps new readers start their reading journey affordably.",
+    problem: "Makes books accessible to all age groups at reduced cost.",
+    audience: "All age groups",
+    language: "TypeScript",
+    languageColor: "#3178c6",
+    topics: ["marketplace", "books", "ecommerce"],
+    date: "Mar 22",
+  },
+  {
+    id: 2,
+    name: "creator-biz-collab",
+    submittedBy: "Leo Joseph Sibichen",
+    description:
+      "Connects business owners with content creators for brand collaborations. Helps businesses promote products through creator partnerships while giving creators paid opportunities.",
+    problem: "No unified platform for creator–brand partnerships in Kerala.",
+    audience: "Young entrepreneurs, content creators",
+    language: "TypeScript",
+    languageColor: "#3178c6",
+    topics: ["marketing", "creators", "b2b"],
+    date: "Mar 22",
+  },
+  {
+    id: 3,
+    name: "pharma-cost-db",
+    submittedBy: "Anonymous",
+    description:
+      "A medicine cost database that finds drugs with the same or similar active compounds and suggests affordable alternatives.",
+    problem: "Patients and doctors lack a tool to find cheaper equivalent medicines.",
+    audience: "Doctors, nurses, general public",
+    language: "Python",
+    languageColor: "#3572A5",
+    topics: ["healthcare", "pharma", "database"],
+    date: "Mar 22",
+  },
+  {
+    id: 4,
+    name: "find-toddy-shop",
+    submittedBy: "Aravind",
+    description:
+      "A web and mobile app to discover authentic toddy shops across Kerala — with locations, food availability, quality info, and user reviews.",
+    problem: "No centralised digital platform for Kerala's traditional toddy shop culture.",
+    audience: "Food & culture explorers, tourists, locals",
+    language: "JavaScript",
+    languageColor: "#f1e05a",
+    topics: ["kerala", "maps", "food-culture"],
+    date: "Mar 23",
+  },
+  {
+    id: 5,
+    name: "journal-pub-tool",
+    submittedBy: "Sathish",
+    description:
+      "A lightweight scientific journal writing and publication tool built for non-technical PhD researchers — simplifying formatting, citations, and submission.",
+    problem: "PhD scholars face friction with complex journal writing tools.",
+    audience: "Technical & non-technical researchers",
+    language: "Python",
+    languageColor: "#3572A5",
+    topics: ["research", "academic", "writing"],
+    date: "Mar 23",
+  },
+  {
+    id: 6,
+    name: "friends-meetup-finder",
+    submittedBy: "Abhijith",
+    description:
+      "Finds a fair, optimised meeting point for friends spread across different cities — considering travel time, transport options (public & private), and nearby junctions.",
+    problem: "No tool finds a genuinely fair midpoint for multi-city friend meetups in Kerala.",
+    audience: "Friend groups across different locations",
+    language: "TypeScript",
+    languageColor: "#3178c6",
+    topics: ["maps", "social", "travel"],
+    date: "Mar 27",
+  },
+  {
+    id: 7,
+    name: "repo-pulse",
+    submittedBy: "Aby Varghese",
+    description:
+      "RepoPulse — a modern GitHub analytics dashboard that transforms repositories into meaningful insights. Track commits, PRs, and contribution trends in real-time.",
+    problem: "Developers lack a clean, at-a-glance dashboard for repo health.",
+    audience: "Developers, open source contributors",
+    language: "TypeScript",
+    languageColor: "#3178c6",
+    topics: ["github", "analytics", "dashboard"],
+    date: "Mar 28",
+  },
+];
+
+function GitHubIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+    </svg>
+  );
+}
+
+function FolderIcon() {
+  return (
+    <svg className="w-4 h-4 text-black/40 flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z" />
+    </svg>
+  );
+}
+
+function PersonIcon() {
+  return (
+    <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z" />
+    </svg>
+  );
+}
+
+export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-[#fef9ea] font-sans text-black neo-brutalist-grid selection:bg-[#FFE66D] selection:text-black">
-      <NavBar />
-
       <main className="max-w-6xl mx-auto px-6 py-24 pb-32">
-        {/* Month Header Section */}
+
+        {/* Header Section */}
         <section className="mt-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="relative inline-block transform -rotate-2 bg-[#FF6B6B] border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-fade-in-up">
-            <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-black">
-              MARCH 2024
+            <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black">
+              OPEN SOURCE
             </h1>
+            <p className="text-xl md:text-2xl font-black uppercase tracking-tight text-black/70 mt-1">
+              Project Ideas
+            </p>
             <div className="absolute -top-4 -right-4 bg-[#6dfe9c] border-2 border-black px-4 py-1 font-black text-sm rotate-12 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase">
-              Upcoming
+              7 Submissions
             </div>
           </div>
 
           <div className="max-w-md text-right md:text-left animate-fade-in-up delay-100">
             <p className="text-xl font-bold uppercase leading-tight border-l-4 border-black pl-4">
-              Kerala's Premier Tech Collective gathering for code, coffee, and community.
+              Real ideas from the KCC community. Submitted, reviewed, and now in progress.
             </p>
-            <div className="mt-4 flex gap-2 justify-end md:justify-start">
-              <span className="bg-black text-white px-3 py-1 text-xs font-black uppercase">Live Updates</span>
-              <span className="bg-white text-black border-2 border-black px-3 py-1 text-xs font-black uppercase">Every Weekend</span>
+            <div className="mt-4 flex gap-2 justify-end md:justify-start flex-wrap">
+              <span className="bg-black text-white px-3 py-1 text-xs font-black uppercase">Open Source</span>
+              <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 border-2 border-amber-800 px-3 py-1 text-xs font-black uppercase">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse inline-block" />
+                In Progress
+              </span>
             </div>
           </div>
         </section>
 
-        {/* Events Grid Section with Blur & Coming Soon */}
+        {/* Repos Grid */}
         <section className="relative mt-20">
-          {/* Coming Soon Overlay */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-            <div className="bg-[#FF6B6B] border-4 border-black p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] -rotate-2 animate-bounce-slow">
-              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter text-black text-center">
-                COMING<br />SOON
-              </h2>
-              <div className="mt-4 border-t-4 border-black pt-4 text-center text-sm font-black uppercase tracking-widest">
-              </div>
-            </div>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {REPOS.map((repo, i) => (
+              <div
+                key={repo.id}
+                className="bg-white border-4 border-black p-5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                style={{
+                  rotate: i % 3 === 0 ? "0.5deg" : i % 3 === 1 ? "-0.5deg" : "0.2deg",
+                }}
+              >
+                {/* Card Header */}
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <FolderIcon />
+                    <span className="text-xs font-black text-black/40 uppercase">kcc /</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 bg-amber-100 border border-amber-400 text-amber-800 px-2 py-0.5 text-[10px] font-black uppercase flex-shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
+                    In Progress
+                  </span>
+                </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 blur-xl grayscale opacity-30 pointer-events-none select-none">
-            {/* Event Card 1 */}
-            <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform rotate-1 transition-transform animate-fade-in-up delay-200">
-              <div className="flex justify-between items-start mb-6">
-                <div className="bg-[#6dfe9c] border-4 border-black w-20 h-20 flex flex-col items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-4xl font-black leading-none">09</span>
-                  <span className="text-xs font-black uppercase">MAR</span>
-                </div>
-                <span className="material-symbols-outlined text-4xl">code</span>
-              </div>
-              <h3 className="text-2xl font-black uppercase leading-none mb-4 tracking-tighter">Rust Meetup Kochi: Memory Safety 101</h3>
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">schedule</span>
-                  <span className="text-sm font-bold uppercase">10:00 AM - 01:00 PM</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">location_on</span>
-                  <span className="text-sm font-bold uppercase underline">Cafe Coffee Day, Panampilly Nagar</span>
-                </div>
-              </div>
-              <button className="w-full bg-black text-white py-4 font-black uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,109,54,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                JOIN THE STACK
-              </button>
-            </div>
+                {/* Repo name */}
+                <h3 className="text-lg font-black uppercase tracking-tight text-black leading-tight">
+                  {repo.name}
+                </h3>
 
-            {/* Event Card 2 */}
-            <div className="bg-[#e7e2d4] border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 transition-transform animate-fade-in-up delay-300">
-              <div className="flex justify-between items-start mb-6">
-                <div className="bg-[#FF6B6B] border-4 border-black w-20 h-20 flex flex-col items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-white">
-                  <span className="text-4xl font-black leading-none">16</span>
-                  <span className="text-xs font-black uppercase">MAR</span>
-                </div>
-                <span className="material-symbols-outlined text-4xl">rocket_launch</span>
-              </div>
-              <h3 className="text-2xl font-black uppercase leading-none mb-4 tracking-tighter">Hacker News Meetup: Show HN Live</h3>
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">schedule</span>
-                  <span className="text-sm font-bold uppercase">04:00 PM - 07:00 PM</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">location_on</span>
-                  <span className="text-sm font-bold uppercase underline">KCC Hub, Infopark Phase 2</span>
-                </div>
-              </div>
-              <button className="w-full bg-[#6dfe9c] text-black py-4 font-black uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                RSVP NOW
-              </button>
-            </div>
+                {/* Description */}
+                <p className="text-sm text-black/70 font-medium leading-snug flex-1">
+                  {repo.description}
+                </p>
 
-            {/* Event Card 3 */}
-            <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform rotate-2 transition-transform relative overflow-hidden animate-fade-in-up delay-400">
-              <div className="halftone-texture absolute inset-0 opacity-10 pointer-events-none"></div>
-              <div className="flex justify-between items-start mb-6">
-                <div className="bg-black text-white border-4 border-black w-20 h-20 flex flex-col items-center justify-center shadow-[4px_4px_0px_0px_rgba(77,224,130,1)]">
-                  <span className="text-4xl font-black leading-none">23</span>
-                  <span className="text-xs font-black uppercase">MAR</span>
+                {/* Topics */}
+                <div className="flex flex-wrap gap-1.5">
+                  {repo.topics.map((t) => (
+                    <span
+                      key={t}
+                      className="bg-[#e7e2d4] border border-black/20 px-2 py-0.5 text-[10px] font-black uppercase text-black/60"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
-                <span className="material-symbols-outlined text-4xl">coffee</span>
-              </div>
-              <h3 className="text-2xl font-black uppercase leading-none mb-4 tracking-tighter">Breakfast & Bytes: AI Workflow Brunch</h3>
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">schedule</span>
-                  <span className="text-sm font-bold uppercase">09:00 AM - 12:00 PM</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">location_on</span>
-                  <span className="text-sm font-bold uppercase underline">The Voyager Cafe, Kakkanad</span>
-                </div>
-              </div>
-              <button className="w-full bg-black text-white py-4 font-black uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(255,107,107,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                BOOK A SEAT
-              </button>
-            </div>
 
-            {/* Event Card 4 */}
-            <div className="bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 transition-transform animate-fade-in-up delay-500">
-              <div className="flex justify-between items-start mb-6">
-                <div className="bg-[#ede8d9] border-4 border-black w-20 h-20 flex flex-col items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-4xl font-black leading-none">30</span>
-                  <span className="text-xs font-black uppercase">MAR</span>
-                </div>
-                <span className="material-symbols-outlined text-4xl">terminal</span>
-              </div>
-              <h3 className="text-2xl font-black uppercase leading-none mb-4 tracking-tighter">Open Source Saturday: PR Marathon</h3>
-              <div className="space-y-2 mb-6">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">schedule</span>
-                  <span className="text-sm font-bold uppercase">10:00 AM - 05:00 PM</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">location_on</span>
-                  <span className="text-sm font-bold uppercase underline">Online & Hybrid @ KCC Discord</span>
+                {/* Footer */}
+                <div className="border-t-2 border-black/10 pt-3 flex items-center justify-between gap-3 flex-wrap mt-2">
+                  <div className="flex items-center gap-3 text-xs font-black text-black/50 uppercase">
+                    <span className="flex items-center gap-1.5">
+                      <span
+                        className="w-3 h-3 rounded-full border border-black/20 inline-block flex-shrink-0"
+                        style={{ backgroundColor: repo.languageColor }}
+                      />
+                      {repo.language}
+                    </span>
+                    <span className="flex items-center gap-1 text-black/40">
+                      <PersonIcon />
+                      {repo.submittedBy === "Anonymous" ? "Anon" : repo.submittedBy.split(" ")[0]}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-black text-black/30 uppercase">{repo.date}</span>
                 </div>
               </div>
-              <button className="w-full bg-white text-black py-4 font-black uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
-                GET INVITE
-              </button>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Newsletter Section */}
+        {/* Submit idea CTA */}
         <section className="mt-24 bg-black p-8 md:p-12 relative overflow-hidden border-4 border-black animate-fade-in">
-          <div className="halftone-texture absolute inset-0 text-white/5 pointer-events-none"></div>
+          <div className="halftone-texture absolute inset-0 text-white/5 pointer-events-none" />
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div className="flex-1">
               <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-4">
-                DON'T MISS THE <br /><span className="text-[#6dfe9c] underline">NEXT BREW.</span>
+                GOT AN IDEA? <br />
+                <span className="text-[#6dfe9c] underline">SUBMIT IT.</span>
               </h2>
               <p className="text-white/60 font-bold uppercase text-sm tracking-widest">
-                Weekly updates on meetups, jobs, and tools. No spam, only code.
+                The best Kerala OSS projects start with a problem worth solving. We build it together.
               </p>
             </div>
-            <div className="w-full md:auto flex flex-col sm:flex-row gap-0">
-              <input className="bg-white border-4 border-black px-6 py-4 font-black uppercase placeholder:text-black/30 focus:outline-none focus:ring-0 w-full sm:w-80 text-black" placeholder="YOUR-EMAIL@TECH.COM" type="email" />
-              <button className="bg-[#6dfe9c] text-black px-8 py-4 border-4 border-black border-l-0 font-black uppercase hover:bg-white transition-colors">
-                SUBSCRIBE
-              </button>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://forms.gle/DFamPbrzcouDGWkX6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center border-4 border-black gap-2 bg-[#6dfe9c] text-black px-8 py-4 font-black uppercase shadow-[4px_4px_0px_0px_rgba(109,254,156,0.4)] hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all"
+              >
+                Submit Idea
+              </a>
             </div>
           </div>
-          {/* News Ticker Decoration */}
+
+          {/* News Ticker */}
           <div className="absolute -bottom-1 left-0 w-full bg-[#6dfe9c] border-t-4 border-black overflow-hidden py-1 whitespace-nowrap">
             <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest">
               <span>* KERALA CODERS CAFE *</span>
-              <span>* COMMUNITY DRIVEN *</span>
-              <span>* EST 2024 *</span>
-              <span>* 5000+ CODERS *</span>
+              <span>* 7 IDEAS SUBMITTED *</span>
+              <span>* OPEN SOURCE *</span>
+              <span>* FORK &amp; CONTRIBUTE *</span>
               <span>* KERALA CODERS CAFE *</span>
-              <span>* COMMUNITY DRIVEN *</span>
-              <span>* EST 2024 *</span>
-              <span>* 5000+ CODERS *</span>
+              <span>* 7 IDEAS SUBMITTED *</span>
+              <span>* OPEN SOURCE *</span>
+              <span>* FORK &amp; CONTRIBUTE *</span>
             </div>
           </div>
         </section>
+
       </main>
-
-
     </div>
   );
 }

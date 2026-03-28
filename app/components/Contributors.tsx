@@ -49,7 +49,7 @@ export default function Contributors() {
   }, []);
 
   return (
-    <section id="contributors" className="px-6 py-28 md:px-12 bg-white border-t-4 border-black">
+    <section id="contributors" className="scroll-mt-24 px-6 py-28 md:px-12 bg-white border-t-4 border-black">
       <div className="mx-auto max-w-[1280px]">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-[750px]">

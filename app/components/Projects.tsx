@@ -59,7 +59,7 @@ export default function Projects() {
   const cards = useInView(0.1);
 
   return (
-    <section id="projects" className="px-6 py-28 md:px-12 bg-white border-t-4 border-black">
+    <section id="projects" className="scroll-mt-24 px-6 py-28 md:px-12 bg-white border-t-4 border-black">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <div

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useLenis } from "lenis/react";
 import KccCupMark from "./KccCupMark";
 
 const navLinks = [
@@ -16,6 +17,7 @@ const navLinks = [
 
 export default function NavBar() {
   const pathname = usePathname();
+  const lenis = useLenis();
   // Ensure the initial state correctly reflects the current path to avoid hydration mismatch jumps
   const [activeSection, setActiveSection] = useState(() => {
     const defaultLink = navLinks.find(link => link.href === pathname);
@@ -91,6 +93,19 @@ export default function NavBar() {
       e.preventDefault();
       window.location.href = href;
       return;
+    }
+
+    // Smooth scroll to top for Home link on the homepage
+    if (pathname === "/" && href === "/") {
+      e.preventDefault();
+      lenis?.scrollTo(0, { duration: 1.5 });
+    }
+
+    // Smooth scroll with Lenis for hash links on the homepage
+    if (pathname === "/" && href.includes("#")) {
+      e.preventDefault();
+      const hash = href.startsWith("/#") ? `#${href.split("#")[1]}` : href;
+      lenis?.scrollTo(hash, { duration: 1.5 });
     }
 
     setActiveSection(name);

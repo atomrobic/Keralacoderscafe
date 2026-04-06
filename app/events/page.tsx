@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { REPOS } from "@/lib/projects";
 
 
@@ -64,9 +65,10 @@ export default function ProjectsPage() {
         <section className="relative mt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {REPOS.map((repo, i) => (
-              <div
+              <Link
                 key={repo.id}
-                className="bg-white border-4 border-black p-5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
+                href={`/events/${repo.id}`}
+                className="bg-white border-4 border-black p-5 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer no-underline text-inherit"
                 style={{
                   rotate: i % 3 === 0 ? "0.5deg" : i % 3 === 1 ? "-0.5deg" : "0.2deg",
                 }}
@@ -136,7 +138,7 @@ export default function ProjectsPage() {
                   </div>
                   <span className="text-[10px] font-black text-black/30 uppercase">{repo.date}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>

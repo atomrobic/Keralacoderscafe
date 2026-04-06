@@ -111,7 +111,7 @@ export default function ModelViewer({ modelUrl }: { modelUrl: string }) {
       <Canvas shadows dpr={[1, 2]} camera={{ position: [5, 5, 5], fov: 45 }}>
         <ErrorBoundary fallback={(err) => <Loader error={err.message.includes("Unexpected token") ? "Invalid File Format (Check if URL is a direct .glb link)" : err.message} />}>
           <Suspense fallback={<Loader />}>
-            <Stage intensity={0.5} environment="city" adjustCamera shadow={{ type: 'contact', opacity: 0.2 }}>
+            <Stage intensity={0.5} environment="city" adjustCamera shadows={{ type: 'contact', opacity: 0.2 }}>
                <Center>
                   <Model url={modelUrl} />
                </Center>

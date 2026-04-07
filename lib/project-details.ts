@@ -9,13 +9,17 @@ export interface ProjectContent {
   vision: string;
   progress: {
     phase: string;
-    percentage: number;
+    stages: { label: string; percentage: number }[];
   };
   userFeatures: { icon: string; label: string; bg: string }[];
   ownerFeatures: { icon: string; label: string; bg: string }[];
   why: string[];
   team: { name: string; role: string; img: string; shadow: string }[];
   glbModel?: string;
+  /** Cover/poster image shown before the 3D loads */
+  coverImg?: string;
+  /** iOS AR Quick Look — .usdz URL */
+  usdzUrl?: string;
 }
 
 export const PROJECT_DETAILS: Record<number, ProjectContent> = {
@@ -30,7 +34,14 @@ export const PROJECT_DETAILS: Record<number, ProjectContent> = {
     vision: "To become the most trusted platform for discovering authentic and high-quality toddy shop experiences in Kerala while promoting local culture and supporting small businesses.",
     progress: {
       phase: "Initial Vetting Phase",
-      percentage: 45,
+      stages: [
+        { label: "Requirement Analysis", percentage: 100 },
+        { label: "DB Designing", percentage: 70 },
+        { label: "UI/UX Design", percentage: 0 },
+        { label: "Backend Dev", percentage: 0 },
+        { label: "Frontend", percentage: 0 },
+        { label: "Mobile Optimization", percentage: 0 },
+      ],
     },
     userFeatures: [
       { icon: "travel_explore", label: "Search & find toddy shops", bg: "bg-yellow-400" },
@@ -59,5 +70,6 @@ export const PROJECT_DETAILS: Record<number, ProjectContent> = {
       { name: "Amal", role: "UI/UX Strategy", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDiTN5A84WUHpWc0w9DxQrbhhjTbWIC48Buv9ASL9C8K9kbqwIG-Fw0RLVkEQvtX6tMyJuI5MP_4qS1kyO0WlrQl2PL0Lkwh5VeGFbJYNa_E0Sf0V1PQX6XyO7qW8Ueu-SOZFtTn2Ut3iSZlWVj5aEluw_mfhohc2PyPtkiQYHI7rq3FOp93k6PXXof6r2YSczERzZcxY29VbWIsEoPwV_QUshrtdcvZ_Y4oBnGcZhVgkVIwPhtCA1u79bXyfYqn6cDtm_LvMcUsZqZ", shadow: "shadow-[8px_8px_0px_0px_rgba(144,72,0,1)]" },
     ],
     glbModel: "/models/toddy.glb",
+    coverImg: "/toddy-cover.jpg",
   },
 };

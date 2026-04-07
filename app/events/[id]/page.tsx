@@ -82,7 +82,12 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
             <div className={`order-1 lg:order-2 relative group w-full ${!content.glbModel ? 'aspect-video md:aspect-auto' : 'aspect-square lg:aspect-auto lg:h-[600px]'}`}>
               {content.glbModel ? (
                 <div className="w-full h-full">
-                  <ModelViewer modelUrl={content.glbModel} />
+                  <ModelViewer
+                    modelUrl={content.glbModel}
+                    coverImage={content.coverImg}
+                    usdzUrl={content.usdzUrl}
+                    title={hero.title}
+                  />
                 </div>
               ) : (
                 <>
@@ -108,13 +113,25 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
             <div className="absolute -top-3 -left-2 bg-secondary text-white px-4 py-2 font-black text-xs uppercase tracking-widest border-2 border-black z-10">Project Progress</div>
             <h2 className="text-2xl md:text-5xl font-black uppercase mb-6 tracking-tighter pt-4 leading-none">{progress.phase}</h2>
             <p className="leading-relaxed opacity-75 font-bold mb-8">Platform is currently in community-vetting phase. Volunteers are mapping local shops and verifying hygiene standards across three districts.</p>
-            <div className="space-y-4">
-              <div className="h-6 bg-white border-2 border-black rounded-sm overflow-hidden flex">
-                <div className="h-full bg-black transition-all duration-1000" style={{ width: `${progress.percentage}%` }}></div>
-              </div>
-              <div className="flex justify-between items-center font-black uppercase text-sm tracking-widest">
-                <span>Development</span>
-                <span>{progress.percentage}% Complete</span>
+            <div className="space-y-6">
+              {progress.stages.map((stage) => (
+                <div key={stage.label} className="space-y-2">
+                  <div className="flex justify-between items-center font-black uppercase text-[10px] md:text-xs tracking-widest">
+                    <span>{stage.label}</span>
+                    <span>{stage.percentage === 0 ? "Not Started" : `${stage.percentage}%`}</span>
+                  </div>
+                  <div className="h-4 bg-white border-2 border-black rounded-sm overflow-hidden flex">
+                    <div className="h-full bg-black transition-all duration-1000 shadow-[inset_-2px_0px_0px_0px_rgba(255,255,255,0.3)]" style={{ width: `${stage.percentage}%` }}></div>
+                  </div>
+                </div>
+              ))}
+              <div className="pt-4 border-t-2 border-black/10">
+                <div className="flex justify-between items-center font-black uppercase text-sm tracking-tighter">
+                  <span>Overall Status</span>
+                  <span className="bg-black text-yellow-400 px-2">
+                    {Math.round(progress.stages.reduce((acc, s) => acc + s.percentage, 0) / progress.stages.length)}% Complete
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -161,14 +178,41 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
           </div>
         </section>
 
-        {/* Team */}
+        {/* Team — Coming Soon */}
         <section>
-          <div className="mb-12 md:mb-20 text-center">
+          <div className="mb-10 md:mb-16 text-center">
             <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter">Contribution Member List</h2>
             <p className="font-bold uppercase tracking-widest opacity-60 mt-4 underline decoration-black underline-offset-4 decoration-2">Building Kerala&apos;s Digital Heritage</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
-            {team.map((person) => <TeamMember key={person.name} {...person} />)}
+
+          {/* Protected placeholder grid */}
+          <div className="relative">
+            {/* Blurred ghost cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 blur-sm pointer-events-none select-none" aria-hidden="true">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="flex flex-col items-center gap-3">
+                  <div className="w-20 h-20 md:w-28 md:h-28 border-4 border-black rounded-full bg-gradient-to-br from-yellow-100 to-amber-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" />
+                  <div className="space-y-1.5 text-center">
+                    <div className="h-3 w-20 bg-black/20 rounded-sm mx-auto" />
+                    <div className="h-2 w-14 bg-black/10 rounded-sm mx-auto" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Lock overlay */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+              <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-8 py-8 text-center max-w-sm mx-4">
+                <div className="text-5xl mb-4">🔒</div>
+                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter mb-2">Coming Soon</h3>
+                <p className="font-bold text-sm opacity-60 uppercase tracking-widest leading-relaxed">
+                  Contributors will be revealed once the project officially launches.
+                </p>
+                <div className="mt-6 inline-flex items-center gap-2 bg-black text-white px-4 py-2 border-2 border-yellow-400 font-black uppercase text-xs tracking-widest">
+                  <span>⏳</span> Stay Tuned
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

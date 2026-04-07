@@ -138,6 +138,7 @@ import FloatingCTA from "./components/FloatingCTA";
 import SmoothScroll from "./components/SmoothScroll";
 import NavBar from "./components/NavBar";
 import PageLoader from "./components/PageLoader";
+import Script from "next/script";
 import { Suspense } from "react";
 
 export default function RootLayout({
@@ -161,6 +162,20 @@ export default function RootLayout({
       </head>
 
       <body className="min-h-full bg-kcc-paper text-black antialiased">
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RNVWKJQTT5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RNVWKJQTT5');
+          `}
+        </Script>
+
         <Suspense fallback={null}>
           <PageLoader />
         </Suspense>

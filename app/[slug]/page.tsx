@@ -185,9 +185,7 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
             <p className="font-bold uppercase tracking-widest opacity-60 mt-4 underline decoration-black underline-offset-4 decoration-2">Building Kerala&apos;s Digital Heritage</p>
           </div>
 
-          {/* Protected placeholder grid */}
           <div className="relative">
-            {/* Blurred ghost cards */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 blur-sm pointer-events-none select-none" aria-hidden="true">
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="flex flex-col items-center gap-3">
@@ -200,7 +198,6 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
               ))}
             </div>
 
-            {/* Lock overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
               <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] px-8 py-8 text-center max-w-sm mx-4">
                 <div className="text-5xl mb-4">🔒</div>
@@ -251,24 +248,22 @@ const InfoCard = ({ label, value }: { label: string; value: string }) => (
 
 function GenericProjectDetail({ project }: { project: Project }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 md:py-6">
-          <a href="/events" className="text-slate-600 hover:text-slate-900 flex items-center gap-2 text-sm font-medium">
-            ← Back to Projects
-          </a>
-        </div>
+    <div className="min-h-screen bg-[#fef9ea] neo-brutalist-grid py-20">
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 mb-10">
+        <a href="/events" className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 border-2 border-black font-black uppercase text-xs shadow-[4px_4px_0px_0px_rgba(255,230,109,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
+          ← Back to Projects
+        </a>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-8 md:space-y-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium border border-green-300">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8 md:space-y-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm font-black uppercase tracking-widest">
           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          In Progress
+          Project Status: Active Building
         </div>
 
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">{project.name}</h1>
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">{project.description}</p>
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-7xl font-black text-black uppercase tracking-tighter leading-none">{project.name}</h1>
+          <p className="text-xl md:text-2xl text-black font-bold leading-tight border-l-8 border-black pl-8">{project.description}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
@@ -279,10 +274,10 @@ function GenericProjectDetail({ project }: { project: Project }) {
         </div>
 
         <div className="space-y-4">
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Topics</div>
-          <div className="flex flex-wrap gap-2">
+          <div className="text-xs font-black text-black/50 uppercase tracking-[0.2em]">Key Topics</div>
+          <div className="flex flex-wrap gap-3">
             {project.topics.map((topic) => (
-              <span key={topic} className="px-3 py-1 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700 shadow-sm">
+              <span key={topic} className="px-4 py-2 bg-white border-2 border-black font-black uppercase text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
                 {topic}
               </span>
             ))}
@@ -291,10 +286,10 @@ function GenericProjectDetail({ project }: { project: Project }) {
 
         {project.link && (
           <a href={project.link} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors font-medium">
-            View Document
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            className="inline-flex items-center gap-3 px-8 py-4 bg-kcc-gold text-black border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all font-black uppercase text-lg">
+            Read Document
+            <svg className="w-5 h-5 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
         )}
@@ -303,31 +298,20 @@ function GenericProjectDetail({ project }: { project: Project }) {
   );
 }
 
-/* ─── Route ─────────────────────────────────────────────────────── */
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+/* ─── Route Handler ───────────────────────────────────────────── */
 
-export default function ProjectDetailPage({
+export default function SlugRedirectPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = use(params);
-  const router = useRouter();
-  const numId = parseInt(id, 10);
-  const project = REPOS.find((r) => r.id === numId);
-  const bespokeDetails = PROJECT_DETAILS[numId];
-
-  useEffect(() => {
-    if (project?.slug) {
-      router.replace(`/${project.slug}`);
-    }
-  }, [project, router]);
-
+  const { slug } = use(params);
+  const project = REPOS.find((r) => r.slug === slug);
+  
   if (!project) notFound();
 
-  // Show a loading/placeholder during redirect if possible, 
-  // but keep the current render as fallback for non-slugged projects
+  const bespokeDetails = PROJECT_DETAILS[project.id];
+
   if (bespokeDetails) return <BespokeProjectDetail content={bespokeDetails} />;
   return <GenericProjectDetail project={project} />;
 }

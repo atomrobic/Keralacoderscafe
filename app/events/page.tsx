@@ -67,7 +67,7 @@ export default function ProjectsPage() {
             {REPOS.filter(repo => repo.id === 4).map((repo, i) => (
               <Link
                 key={repo.id}
-                href={`/events/${repo.id}`}
+                href={`/${repo.slug}`}
                 className="col-span-1 lg:col-span-2 bg-white border-4 border-black p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row gap-8 hover:-translate-y-2 hover:-translate-x-2 hover:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer no-underline text-inherit group"
               >
                 <div className="w-full md:w-1/2 lg:w-1/3 border-4 border-black relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">

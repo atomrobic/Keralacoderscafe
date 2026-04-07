@@ -1,5 +1,6 @@
 export interface Project {
   id: number;
+  slug: string;
   name: string;
   submittedBy: string;
   description: string;
@@ -15,6 +16,7 @@ export interface Project {
 export const REPOS: Project[] = [
   {
     id: 5,
+    slug: "journal-tool",
     name: "journal-pub-tool",
     submittedBy: "Sathish",
     description:
@@ -29,6 +31,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 6,
+    slug: "meetup-finder",
     name: "friends-meetup-finder",
     submittedBy: "Abhijith",
     description:
@@ -43,6 +46,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 7,
+    slug: "repo-pulse",
     name: "repo-pulse",
     submittedBy: "Aby Varghese",
     description:
@@ -57,6 +61,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 1,
+    slug: "used-books",
     name: "used-book-marketplace",
     submittedBy: "Leo Joseph Sibichen",
     description:
@@ -70,6 +75,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 2,
+    slug: "creator-collab",
     name: "creator-biz-collab",
     submittedBy: "Leo Joseph Sibichen",
     description:
@@ -83,6 +89,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 3,
+    slug: "pharma-db",
     name: "pharma-cost-db",
     submittedBy: "D Pharma",
     description:
@@ -96,6 +103,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 4,
+    slug: "toddy-shop-finder-opensource-project",
     name: "find-toddy-shop",
     submittedBy: "Aravind",
     description:
@@ -109,6 +117,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 8,
+    slug: "nature-id",
     name: "nature-id",
     submittedBy: "Ayoobi Salahudheen",
     description: "NatureID — discover nature around you. A smart AI-powered app to identify plants, birds, and insects using images, camera, or text.",
@@ -121,6 +130,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 9,
+    slug: "ease-up",
     name: "ease-up",
     submittedBy: "Sarhan Qadir KVM",
     description: "EaseUp — a platform to simplify complex workflows and task management for local service providers.",
@@ -133,6 +143,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 10,
+    slug: "deep-peep",
     name: "deep-peep",
     submittedBy: "SHad CT",
     description: "Deep Peep — an advanced visual search tool to find products and information by scanning physical objects.",
@@ -145,6 +156,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 11,
+    slug: "sheet-crm",
     name: "sheet-crm-lite",
     submittedBy: "Kriparaj P",
     description: "A lightweight CRM built on Google Sheets to manage leads, customers, and workflows without complex setup.",
@@ -157,6 +169,7 @@ export const REPOS: Project[] = [
   },
   {
     id: 12,
+    slug: "ai-coding-workspace",
     name: "ai-coding-workspace",
     submittedBy: "Aswin",
     description: "An integrated AI coding workspace that helps developers build, test, and deploy applications faster with smart assistants.",

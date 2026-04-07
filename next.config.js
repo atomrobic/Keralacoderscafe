@@ -16,6 +16,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/events-opensource_projects",
+        destination: "/events",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -143,6 +143,7 @@ const PageLoader: React.FC = () => {
       setTimeout(() => {
         setIsLoading(false);
         localStorage.setItem('kcc_loader_seen', 'true');
+        window.dispatchEvent(new CustomEvent('kcc_loader_finished'));
         setTimeout(() => setIsVisible(false), 800);
       }, Math.max(0, CONFIG.minLoadTime - (Date.now() - startTime)));
     };
@@ -180,6 +181,7 @@ const PageLoader: React.FC = () => {
   const handleTapToDismiss = () => {
     setIsLoading(false);
     localStorage.setItem('kcc_loader_seen', 'true');
+    window.dispatchEvent(new CustomEvent('kcc_loader_finished'));
     setTimeout(() => setIsVisible(false), 800);
   };
 

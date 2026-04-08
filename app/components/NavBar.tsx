@@ -12,6 +12,8 @@ const navLinks = [
   { name: "Community", href: "/#about", type: "scroll" },
   { name: "Contributors", href: "/#contributors", type: "scroll" },
   { name: "Projects", href: "/#projects", type: "scroll" },
+  { name: "About", href: "/#footer", type: "scroll" },
+
 ];
 
 export default function NavBar() {

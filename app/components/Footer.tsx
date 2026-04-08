@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, MessageCircle } from "lucide-react";
+import { Github, MessageCircle, Mail, Twitter } from "lucide-react";
 import { useLenis } from "lenis/react";
 
 const quickLinks = [
@@ -22,6 +22,16 @@ const resources = [
     href: "https://chat.whatsapp.com/GisLp4Xp2Y8BkK8XlP2Xp2",
     icon: <MessageCircle className="h-4 w-4" />,
   },
+  {
+    label: "Email",
+    href: "mailto:keralacoderscafe@gmail.com",
+    icon: <Mail className="h-4 w-4" />,
+  },
+  {
+    label: "X",
+    href: "https://x.com/Keralacoders",
+    icon: <Twitter className="h-4 w-4" />,
+  },
 ];
 
 export default function Footer() {
@@ -36,7 +46,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="px-6 pb-20 pt-10 md:px-12 bg-white">
+    <footer id="footer" className="px-6 pb-20 pt-10 md:px-12 bg-white">
       <div className="mx-auto max-w-[1280px] border-4 border-black bg-white px-8 py-16 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] md:px-16">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1.5fr)_minmax(180px,0.7fr)_minmax(180px,0.7fr)]">
           <div>

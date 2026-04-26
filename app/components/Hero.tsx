@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Github, MessageCircle } from "lucide-react";
 import ColourfulText from "./ColourfulText";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const highlights = [
   "From 1-day beginners to 10+ years experienced developers",
@@ -11,14 +11,14 @@ const highlights = [
 ];
 
 const fallbackContributors = [
-  { name: "Akhil", initial: "AK", color: "bg-kcc-accent", rotation: "rotate-[-2deg]", avatar: "", commits: 0 },
-  { name: "Shan", initial: "SH", color: "bg-kcc-green", rotation: "rotate-[1deg]", avatar: "", commits: 0 },
-  { name: "Akshay", initial: "AS", color: "bg-kcc-gold", rotation: "rotate-[-1deg]", avatar: "", commits: 0 },
-  { name: "Arjun", initial: "AR", color: "bg-[#C8B6FF]", rotation: "rotate-[2deg]", avatar: "", commits: 0 },
+  { name: "Akhil", initial: "AK", color: "bg-kcc-accent", rotation: "sm:rotate-[-2deg]", avatar: "", commits: 0 },
+  { name: "Shan", initial: "SH", color: "bg-kcc-green", rotation: "sm:rotate-[1deg]", avatar: "", commits: 0 },
+  { name: "Akshay", initial: "AS", color: "bg-kcc-gold", rotation: "sm:rotate-[-1deg]", avatar: "", commits: 0 },
+  { name: "Arjun", initial: "AR", color: "bg-[#C8B6FF]", rotation: "sm:rotate-[2deg]", avatar: "", commits: 0 },
 ];
 
 const defaultColors = ["bg-kcc-accent", "bg-kcc-green", "bg-kcc-gold", "bg-[#C8B6FF]"];
-const defaultRotations = ["rotate-[-2deg]", "rotate-[1deg]", "rotate-[-1deg]", "rotate-[2deg]"];
+const defaultRotations = ["sm:rotate-[-2deg]", "sm:rotate-[1deg]", "sm:rotate-[-1deg]", "sm:rotate-[2deg]"];
 
 export default function Hero() {
   const [topContributors, setTopContributors] = useState(fallbackContributors);
@@ -157,7 +157,7 @@ export default function Hero() {
           </div>
 
           {/* ─── NEWSPAPER + STAMP COLLECTION ─── */}
-          <div className="relative mx-auto w-full max-w-[520px] animate-fade-in delay-200 flex flex-col gap-6 lg:self-start">
+          <div className="relative mx-auto w-full max-w-[520px] animate-fade-in delay-200 flex flex-col gap-6 lg:self-start overflow-hidden sm:overflow-visible">
 
 
 
@@ -167,47 +167,43 @@ export default function Hero() {
 
 
             {/* ── Top Contributors – Stamp Collection ── */}
-            <div className="relative border-4 border-black bg-[#F5F0E1] p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] -rotate-1 sm:p-8"
+            {/* ── Top Contributors – Stamp Collection ── */}
+            <div className="relative w-full border-4 border-black bg-[#F5F0E1] p-3 sm:p-8 sm:-rotate-1 overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
               }}
             >
               {/* Header label */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="border-2 border-black bg-white px-3 py-1 text-[0.6rem] font-black uppercase tracking-[0.3em] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="border-2 border-black bg-white px-2 sm:px-3 py-1 text-[0.55rem] sm:text-[0.6rem] font-black uppercase tracking-[0.3em] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                   Top Contributors
                 </div>
-                <div className="text-[0.55rem] font-bold uppercase tracking-[0.2em] text-black/30">
+                <div className="text-[0.5rem] sm:text-[0.55rem] font-bold uppercase tracking-[0.2em] text-black/30">
                   Stamp Collection
                 </div>
               </div>
 
-              {/* Stamp Grid - Horizontally Scrollable */}
-              <div className="grid grid-rows-2 grid-flow-col auto-cols-[calc(50%-10px)] sm:auto-cols-[calc(50%-12px)] gap-5 sm:gap-6 overflow-x-auto pb-4 pt-2 -mx-2 px-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                {topContributors.map((person, i) => (
+                {/* Stamp Grid - Top 4 List */}
+              <div className="grid w-full grid-cols-1 gap-3 sm:gap-4 pb-2 pt-2">
+                {topContributors.slice(0, 4).map((person, i) => (
                   <div
                     key={`${person.name}-${i}`}
-                    className={`snap-center group relative ${person.rotation} transition-all duration-200 hover:rotate-0 hover:scale-105 shrink-0`}
+                    className={`group relative z-10 ${person.rotation} transition-all duration-200 hover:rotate-0 hover:scale-105 min-w-0`}
                   >
                     {/* Stamp outer — perforated edge effect */}
-                    <div className="relative border-4 border-black bg-white p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                    <div className="relative border-4 border-black bg-white p-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] w-full max-w-full"
                       style={{
                         backgroundImage:
                           "radial-gradient(circle, transparent 40%, #000 41%, #000 44%, transparent 45%)",
-                        backgroundSize: "10px 10px",
-                        backgroundPosition: "-5px -5px",
+                        backgroundSize: "8px 8px",
+                        backgroundPosition: "-4px -4px",
                       }}
                     >
                       {/* Inner stamp content */}
-                      <div className={`relative border-2 border-black ${person.color} px-3 py-4 text-center`}>
-                        {/* Stamp value (commits) */}
-                        <div className="absolute top-1 right-2 text-[0.55rem] font-black text-black/40">
-                          {person.commits ? `${person.commits} CMTS` : "₹0.00"}
-                        </div>
-
+                      <div className={`relative border-2 border-black ${person.color} px-3 sm:px-4 py-3 text-center min-w-0 flex items-center gap-4`}>
                         {/* Avatar circle */}
-                        <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center border-3 border-black bg-white font-black text-xl text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] overflow-hidden">
+                        <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center border-2 border-black bg-white font-black text-sm text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)] overflow-hidden">
                           {person.avatar ? (
                             <img src={person.avatar} alt={person.name} className="h-full w-full object-cover" />
                           ) : (
@@ -215,74 +211,57 @@ export default function Hero() {
                           )}
                         </div>
 
-                        {/* Name */}
-                        <div className="font-black uppercase text-[0.7rem] sm:text-[0.75rem] tracking-tight text-black leading-tight text-center break-words w-full px-1 mx-auto line-clamp-2" style={{ wordBreak: 'break-word' }}>
-                          {person.name}
-                        </div>
-
-                        {/* Country / Role label */}
-                        <div className="mt-1.5 text-[0.5rem] font-bold uppercase tracking-[0.25em] text-black/40">
-                          Kerala &bull; Dev
-                        </div>
-
-                        {/* Decorative postmark circle (visible on hover) */}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                          <div className="h-16 w-16 rounded-full border-[3px] border-dashed border-kcc-accent/60 flex items-center justify-center rotate-[-20deg]">
-                            <div className="text-[0.5rem] font-black uppercase text-kcc-accent/60 leading-none text-center">
-                              KCC<br />Approved
-                            </div>
+                        {/* Info */}
+                        <div className="flex-1 min-w-0 text-left">
+                          <div className="font-black uppercase text-[0.75rem] sm:text-[0.9rem] tracking-tight text-black truncate max-w-[120px] sm:max-w-full">
+                            {person.name}
                           </div>
+                          <div className="text-[0.55rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.1em] text-black/60">
+                            {person.commits ? `${person.commits} CONTRIBUTIONS` : "0 CONTRIBUTIONS"}
+                          </div>
+                        </div>
+
+                        {/* Rank */}
+                        <div className="text-xl font-black italic text-black/20 shrink-0">
+                          #0{i + 1}
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
 
-                {/* 'YOU?' Stamp Card for New Contributors */}
+                {/* 'YOU?' Stamp Card */}
                 <a
                   href="https://github.com/KERALACODERSCAFE/Keralacoderscafe"
                   target="_blank"
                   rel="noopener"
-                  className="snap-center group relative rotate-[1deg] transition-all duration-200 hover:rotate-0 hover:scale-105 shrink-0 block"
+                  className="group relative z-10 sm:rotate-[1deg] transition-all duration-200 hover:rotate-0 hover:scale-105 block min-w-0"
                 >
-                  <div className="relative border-4 border-black bg-white p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-full"
+                  <div className="relative border-4 border-black bg-white p-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] w-full max-w-full"
                     style={{
                       backgroundImage: "radial-gradient(circle, transparent 40%, #000 41%, #000 44%, transparent 45%)",
-                      backgroundSize: "10px 10px",
-                      backgroundPosition: "-5px -5px",
+                      backgroundSize: "8px 8px",
+                      backgroundPosition: "-4px -4px",
                     }}
                   >
-                    <div className="relative border-2 border-dashed border-black bg-kcc-paper px-3 py-4 text-center h-full flex flex-col items-center justify-center transition-colors group-hover:bg-kcc-gold">
-                      <div className="absolute top-1 right-2 text-[0.55rem] font-black text-black/40">
-                        1st PR
+                    <div className="relative border-2 border-dashed border-black bg-kcc-paper px-3 sm:px-4 py-3 flex items-center gap-4 transition-colors group-hover:bg-kcc-gold">
+                      <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center border-2 border-black bg-white font-black text-xl text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)] group-hover:scale-110 transition-transform">
+                        +
                       </div>
-                      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center border-3 border-black bg-white font-black text-2xl text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,0.15)] group-hover:scale-110 transition-transform">
-                        {isAnimating ? fastAvatars[avatarIndex] : "+"}
-                      </div>
-                      <div className="font-black uppercase text-[0.6rem] tracking-tight text-black leading-tight max-w-[80px] mx-auto text-center">
-                        open source builder
-                      </div>
-                      <div className="mt-1.5 text-[0.45rem] font-bold uppercase tracking-[0.05em] text-black/50 text-center leading-tight">
-                        contribute &<br />get featured
+                      <div className="flex-1 min-w-0 text-left">
+                        <div className="font-black uppercase text-[0.75rem] sm:text-[0.9rem] tracking-tight text-black truncate max-w-[120px] sm:max-w-full">
+                          Join the collection
+                        </div>
+                        <div className="text-[0.55rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.1em] text-black/60">
+                          CONTRIBUTE & GET FEATURED
+                        </div>
                       </div>
                     </div>
                   </div>
                 </a>
               </div>
 
-              {/* View All Contributors label */}
-              <div className="mt-2 flex items-center justify-center gap-3">
-                <div className="h-[2px] flex-1 bg-black/15" />
-                <a
-                  href="https://github.com/KERALACODERSCAFE/Keralacoderscafe/graphs/contributors"
-                  target="_blank"
-                  rel="noopener"
-                  className="border-3 border-black bg-kcc-gold px-4 py-2 font-black uppercase text-sm text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] actvie:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-pointer"
-                >
-                  View All Contributors
-                </a>
-                <div className="h-[2px] flex-1 bg-black/15" />
-              </div>
+
 
               {/* Vintage postmark decoration */}
               <div className="absolute -top-3 -left-3 h-10 w-10 border-3 border-black bg-kcc-accent flex items-center justify-center rotate-12 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hidden sm:flex">

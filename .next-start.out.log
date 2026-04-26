@@ -17,3 +17,21 @@ Creating turbopack project { dir: 'C:\\Users\\admin\\Keralacoderscafe', testMode
  GET /events/4 200 in 2.5s (next.js: 2.4s, application-code: 141ms)
 ✓ Compiled in 472ms
 ✓ Compiled in 221ms
+ GET /manifest.webmanifest 200 in 138ms (next.js: 75ms, application-code: 63ms)
+ GET /toddy-shop-finder-opensource-project 200 in 2.0s (next.js: 396ms, application-code: 1648ms)
+ GET /manifest.webmanifest 200 in 88ms (next.js: 25ms, application-code: 63ms)
+ GET /manifest.webmanifest 200 in 79ms (next.js: 30ms, application-code: 49ms)
+✓ Compiled in 181ms
+ GET /toddy-shop-finder-opensource-project 200 in 425ms (next.js: 332ms, application-code: 93ms)
+ GET /manifest.webmanifest 200 in 36ms (next.js: 8ms, application-code: 28ms)
+○ Compiling /join ...
+ GET /events 200 in 94ms (next.js: 26ms, application-code: 68ms)
+ GET /join 200 in 6.7s (next.js: 6.6s, application-code: 63ms)
+ GET / 200 in 6.6s (next.js: 6.6s, application-code: 41ms)
+ GET / 200 in 153ms (next.js: 6ms, application-code: 146ms)
+ GET /manifest.webmanifest 200 in 23ms (next.js: 8ms, application-code: 15ms)
+✓ Compiled in 474ms
+✓ Compiled in 193ms
+✓ Compiled in 261ms
+✓ Compiled in 601ms
+[?25h

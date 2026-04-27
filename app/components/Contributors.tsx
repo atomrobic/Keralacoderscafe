@@ -30,8 +30,7 @@ export default function Contributors() {
     async function fetchContributors() {
       try {
         const REPOS_TO_FETCH = [
-          "https://api.github.com/repos/KERALACODERSCAFE/Keralacoderscafe/contributors?per_page=50",
-          "https://api.github.com/repos/KERALACODERSCAFE/Kerala-toddy-finder/contributors?per_page=50",
+          "/api/github?endpoint=repos/KERALACODERSCAFE/Keralacoderscafe/contributors?per_page=50",
         ];
 
         const results = await Promise.allSettled(

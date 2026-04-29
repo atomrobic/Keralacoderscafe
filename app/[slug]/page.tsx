@@ -7,6 +7,7 @@ import { PROJECT_DETAILS, ProjectContent } from "@/lib/project-details";
 import DiagonalGrid from "@/components/ui/demo";
 import BackgroundGlow from "@/components/ui/background-components";
 import ModelViewer from "@/app/components/ModelViewer";
+import CursorFollower from "@/app/components/CursorFollower";
 
 /* ─── Reusable Components ─────────────────────────────────────── */
 
@@ -75,7 +76,7 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
     const fetchStats = async () => {
       try {
         const response = await fetch(`/api/github?endpoint=repos/${repoPath}/stats/punch_card`);
-        
+
         if (response.status === 202 && retryCount < 3) {
           retryCount++;
           setTimeout(fetchStats, 3000);
@@ -84,7 +85,7 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
 
         if (response.status === 403) {
           // Rate limited - use mock data for demonstration
-          const mock = Array.from({ length: 7 }, () => 
+          const mock = Array.from({ length: 7 }, () =>
             Array.from({ length: 24 }, () => Math.floor(Math.random() * 20))
           );
           setPunchData(mock);
@@ -110,7 +111,7 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
       } catch (err) {
         console.error("Error fetching punch card:", err);
         // Fallback to mock on any error for demo purposes
-        const mock = Array.from({ length: 7 }, () => 
+        const mock = Array.from({ length: 7 }, () =>
           Array.from({ length: 24 }, () => Math.floor(Math.random() * 15))
         );
         setPunchData(mock);
@@ -163,10 +164,10 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
         <div className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
           <span className="text-[8px] font-black uppercase opacity-50 mr-1 tracking-widest">Quiet</span>
           {["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"].map((color, i) => (
-            <div 
-              key={i} 
-              className="w-4 h-4 border-2 border-black/50 rounded-sm" 
-              style={{ backgroundColor: color }} 
+            <div
+              key={i}
+              className="w-4 h-4 border-2 border-black/50 rounded-sm"
+              style={{ backgroundColor: color }}
             />
           ))}
           <span className="text-[8px] font-black uppercase opacity-50 ml-1 tracking-widest">Peak</span>
@@ -199,7 +200,7 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
                 </div>
               ))}
             </div>
-            
+
             <div className="flex gap-1 mt-4 text-[8px] font-black uppercase opacity-40 tracking-widest min-w-max pl-[4px]">
               {Array.from({ length: 24 }).map((_, i) => (
                 <div key={i} className="w-6 md:w-8 text-center text-white">
@@ -210,7 +211,7 @@ function ProjectPulse({ repoUrl }: { repoUrl?: string }) {
           </div>
         </div>
       </div>
-      
+
       <div className="flex justify-between mt-4 text-[10px] font-black uppercase opacity-40 tracking-[0.3em] border-t-2 border-white/10 pt-4">
         <span>Midnight (00:00)</span>
         <div className="flex items-center gap-2">
@@ -306,18 +307,18 @@ function LiveContributors() {
       <div className="space-y-8">
         {/* Loading skeleton for controls */}
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-          <div className="h-14 w-full md:w-96 bg-black/10 border-4 border-black animate-pulse" />
-          <div className="h-14 w-48 bg-black/10 border-4 border-black animate-pulse" />
+          <div className="h-14 w-full md:w-96 bg-zinc-800 border-4 border-zinc-700 animate-pulse rounded-xl" />
+          <div className="h-14 w-48 bg-zinc-800 border-4 border-zinc-700 animate-pulse rounded-full" />
         </div>
 
         {/* Loading skeleton for grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="bg-white border-2 border-black p-4 flex gap-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-              <div className="w-16 h-16 border-2 border-black bg-black/5 animate-pulse shrink-0" />
-              <div className="flex-1 space-y-2">
-                <div className="h-4 bg-black/10 rounded-sm animate-pulse" />
-                <div className="h-3 w-1/2 bg-black/5 rounded-sm animate-pulse" />
+            <div key={i} className="bg-[#1a1a1a] border-[3px] border-zinc-800 rounded-xl p-4 flex gap-4 shadow-none">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-zinc-700 bg-zinc-800 animate-pulse shrink-0" />
+              <div className="flex-1 space-y-2 mt-2">
+                <div className="h-4 bg-zinc-700 rounded-sm animate-pulse w-3/4" />
+                <div className="h-3 w-1/2 bg-zinc-800 rounded-sm animate-pulse" />
               </div>
             </div>
           ))}
@@ -328,9 +329,9 @@ function LiveContributors() {
 
   if (contributors.length === 0) {
     return (
-      <div className="text-center py-20 bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div className="text-center py-20 bg-black border-4 border-yellow-400 shadow-[8px_8px_0px_0px_rgba(250,204,21,1)]">
         <div className="text-6xl mb-4">🔍</div>
-        <div className="font-black uppercase tracking-widest opacity-50 text-xl">
+        <div className="font-black uppercase tracking-widest text-white/50 text-xl">
           No contributor data available
         </div>
       </div>
@@ -342,33 +343,33 @@ function LiveContributors() {
   return (
     <div className="space-y-12">
       {/* Leader Board Header & Filter */}
-      <div className="bg-white border-4 border-black p-6 md:p-10 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] space-y-8">
+      <div className="bg-black border-4 border-yellow-400 p-6 md:p-10 shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] space-y-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-4">
-            <svg className="w-10 h-10 md:w-12 md:h-12 text-black" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="w-10 h-10 md:w-12 md:h-12 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
             </svg>
-            <h2 className="text-3xl md:text-5xl font-black text-black uppercase tracking-tighter">
+            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
               Leader Board
             </h2>
           </div>
 
           <div className="flex flex-nowrap items-center gap-2 sm:gap-4 w-full md:w-auto mt-4 md:mt-0">
             <div className="flex items-center gap-2 flex-1 md:flex-none">
-              <span className="text-[10px] font-black text-black/40 uppercase tracking-widest hidden sm:inline">filter:</span>
+              <span className="text-[10px] font-black text-white/40 uppercase tracking-widest hidden sm:inline">filter:</span>
               <div className="relative flex-1 md:w-auto">
                 <input
                   type="text"
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-gray-50 text-black px-3 py-2 border-2 border-black rounded-full text-xs font-bold outline-none focus:ring-2 ring-yellow-400 transition-all w-full md:w-48 lg:w-64"
+                  className="bg-[#1a1a1a] text-white px-3 py-2 border-2 border-yellow-400 rounded-full text-xs font-bold outline-none focus:ring-2 ring-yellow-400 transition-all w-full md:w-48 lg:w-64 placeholder:text-zinc-500"
                 />
               </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-[10px] font-black text-black/40 uppercase tracking-widest hidden sm:inline">sort:</span>
-              <select className="bg-gray-50 text-black px-3 py-2 border-2 border-black rounded-full text-xs font-bold outline-none">
+              <span className="text-[10px] font-black text-white/40 uppercase tracking-widest hidden sm:inline">sort:</span>
+              <select className="bg-[#1a1a1a] text-white px-3 py-2 border-2 border-yellow-400 rounded-full text-xs font-bold outline-none">
                 <option>Commits</option>
                 <option>Impact</option>
               </select>
@@ -396,9 +397,16 @@ function LiveContributors() {
             currentContributors.map((c, i) => {
               const globalIndex = startIndex + i;
               const rank = globalIndex + 1;
-              
-              // Uniform background color as requested
-              const rankBg = "bg-white";
+
+              const themes = [
+                { border: 'border-[#4a8fb9]', text: 'text-[#4a8fb9]' },
+                { border: 'border-[#a8327b]', text: 'text-[#a8327b]' },
+                { border: 'border-[#4bb3bd]', text: 'text-[#4bb3bd]' },
+                { border: 'border-[#e45a6c]', text: 'text-[#e45a6c]' },
+                { border: 'border-[#f09c3e]', text: 'text-[#f09c3e]' },
+                { border: 'border-[#6c5ce7]', text: 'text-[#6c5ce7]' },
+              ];
+              const theme = themes[globalIndex % themes.length];
 
               return (
                 <a
@@ -406,16 +414,16 @@ function LiveContributors() {
                   href={c.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group relative flex items-center gap-4 p-4 ${rankBg} border-4 border-black rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}
+                  className={`group relative flex items-center gap-4 p-4 bg-[#1a1a1a] border-[3px] ${theme.border} rounded-xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}
                 >
                   {/* Rank Number */}
-                  <div className="w-8 text-center font-black text-black text-xl md:text-2xl opacity-30">
+                  <div className={`w-8 text-center font-black ${theme.text} text-xl md:text-2xl opacity-80`}>
                     {rank}
                   </div>
 
                   {/* Avatar */}
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-black/10 overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-[3px] border-black/50 overflow-hidden shadow-lg group-hover:scale-105 transition-transform">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={c.avatar_url} alt={c.login} className="w-full h-full object-cover" />
                     </div>
@@ -423,23 +431,23 @@ function LiveContributors() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-black font-black text-base md:text-lg uppercase tracking-tighter truncate">
+                    <h3 className="text-white font-black text-base md:text-lg uppercase tracking-tighter truncate">
                       {c.login}
                     </h3>
                     <div className="flex items-center gap-4 mt-1">
                       <div className="flex flex-col">
-                        <span className="text-[8px] font-black uppercase opacity-30">Commits</span>
-                        <span className="text-xs font-black">{c.contributions}</span>
+                        <span className={`text-[8px] font-black uppercase opacity-60 ${theme.text}`}>Commits</span>
+                        <span className="text-xs font-black text-white">{c.contributions}</span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[8px] font-black uppercase opacity-30">Impact</span>
-                        <span className="text-xs font-black">{Math.round((c.contributions / (topContributor?.contributions || 1)) * 100)}%</span>
+                        <span className={`text-[8px] font-black uppercase opacity-60 ${theme.text}`}>Impact</span>
+                        <span className="text-xs font-black text-white">{Math.round((c.contributions / (topContributor?.contributions || 1)) * 100)}%</span>
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Action Icon */}
-                  <div className="text-black/20 group-hover:text-black transition-colors">
+                  <div className={`${theme.text} opacity-50 group-hover:opacity-100 transition-colors`}>
                     <span className="material-symbols-outlined text-xl">north_east</span>
                   </div>
                 </a>
@@ -465,7 +473,7 @@ function LiveContributors() {
                 <button
                   key={pageNum}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-10 h-10 border-4 border-black font-black flex items-center justify-center transition-all ${currentPage === pageNum ? 'bg-yellow-400 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'bg-white hover:bg-black hover:text-white'
+                  className={`w-10 h-10 border-4 border-yellow-400 font-black flex items-center justify-center transition-all ${currentPage === pageNum ? 'bg-yellow-400 text-black shadow-[2px_2px_0px_0px_rgba(250,204,21,1)]' : 'bg-[#1a1a1a] text-yellow-400 hover:bg-yellow-400 hover:text-black'
                     }`}
                 >
                   {pageNum}
@@ -491,6 +499,7 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
 
   return (
     <DiagonalGrid className="bg-background text-on-background font-body min-h-screen">
+      <CursorFollower />
       <BackgroundGlow className="absolute inset-0 pointer-events-none z-0" />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@800;900&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap');
@@ -568,13 +577,18 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
         </section>
 
         {/* Project Progress */}
-        <section className="bg-[#fcfcfc] border-4 border-black p-6 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative">
-          <div className="absolute -top-3 -left-2 bg-black text-white px-4 py-2 font-black text-xs uppercase tracking-widest border-2 border-black z-10">Project Progress</div>
+        <section className="bg-black border-4 border-yellow-400 p-6 md:p-12 shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] relative">
+          <div className="absolute -top-3 -left-2 bg-yellow-400 text-black px-4 py-2 font-black text-xs uppercase tracking-widest border-2 border-black z-10">Project Progress</div>
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-serif text-[#333] pt-4 leading-none">Progress Bar Design</h2>
           </div>
-          
+
           <div className="space-y-2">
+            <style>{`
+              @keyframes shimmer-sweep {
+                0% { transform: translateX(-150%); }
+                100% { transform: translateX(300%); }
+              }
+            `}</style>
             {progress.stages.map((stage, index) => {
               const themes = [
                 { border: 'border-[#4a8fb9]', fill: 'bg-[#4a8fb9]', text: 'text-[#4a8fb9]', icon: 'visibility' },
@@ -594,10 +608,10 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
                     {/* Mobile Header (Icon + Label + Percentage) */}
                     <div className="flex items-center justify-between w-full md:w-64 shrink-0">
                       <div className="flex items-center gap-3 md:gap-4">
-                        <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${theme.fill} text-white flex items-center justify-center shadow-[inset_0_-5px_10px_rgba(0,0,0,0.2)] border-2 border-[#fcfcfc] drop-shadow-md shrink-0`}>
+                        <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${theme.fill} text-white flex items-center justify-center shadow-[inset_0_-5px_10px_rgba(0,0,0,0.4)] border-2 border-black drop-shadow-md shrink-0`}>
                           <span className="material-symbols-outlined text-base md:text-xl">{theme.icon}</span>
                         </div>
-                        <span className={`font-serif text-base md:text-xl ${theme.text} leading-tight`}>{stage.label}</span>
+                        <span className={`font-serif text-base md:text-xl text-white leading-tight`}>{stage.label}</span>
                       </div>
                       {/* Percentage on Mobile Only */}
                       <div className={`md:hidden font-serif text-lg font-bold ${theme.text}`}>
@@ -606,18 +620,27 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
                     </div>
 
                     {/* Middle: Progress Bar */}
-                    <div className={`w-full md:flex-1 h-6 md:h-10 shrink-0 border-[3px] md:border-[4px] ${theme.border} rounded-lg md:rounded-xl flex items-center p-[2px] md:p-1 gap-[1px] md:gap-[2px] bg-white shadow-sm`}>
+                    <div className={`relative w-full md:flex-1 h-6 md:h-10 shrink-0 border-[3px] md:border-[4px] ${theme.border} rounded-lg md:rounded-xl flex items-center p-[2px] md:p-1 gap-[1px] md:gap-[2px] bg-[#1a1a1a] shadow-sm overflow-hidden`}>
                       {Array.from({ length: totalSegments }).map((_, i) => (
-                        <div 
-                          key={i} 
-                          className={`h-full flex-1 rounded-[1px] md:rounded-[2px] transition-all duration-700 ease-out ${
-                            i < (mounted ? filledSegments : 0) 
-                              ? theme.fill 
-                              : 'bg-[#d1d5db]'
-                          }`}
+                        <div
+                          key={i}
+                          className={`h-full flex-1 rounded-[1px] md:rounded-[2px] transition-all duration-700 ease-out ${i < (mounted ? filledSegments : 0)
+                              ? theme.fill
+                              : 'bg-zinc-800'
+                            }`}
                           style={{ transitionDelay: `${i * 10}ms` }}
                         />
                       ))}
+                      {/* Active Shimmer Animation */}
+                      {stage.percentage > 0 && mounted && (
+                        <div 
+                          className="absolute inset-0 w-[60%] h-full pointer-events-none mix-blend-overlay"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
+                            animation: `shimmer-sweep 2.5s infinite ease-in-out ${index * 0.15}s`
+                          }}
+                        />
+                      )}
                     </div>
 
                     {/* Right: Percentage on Desktop Only */}
@@ -625,10 +648,10 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
                       {stage.percentage}%
                     </div>
                   </div>
-                  
+
                   {/* Dashed Separator */}
                   {index < progress.stages.length - 1 && (
-                    <div className="border-b border-dashed border-gray-400 w-full mt-2 opacity-50" />
+                    <div className="border-b border-dashed border-zinc-700 w-full mt-2 opacity-50" />
                   )}
                 </div>
               );
@@ -655,7 +678,7 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
             <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter">Contribution Member List</h2>
             <p className="font-bold uppercase tracking-widest opacity-60 underline decoration-black underline-offset-4 decoration-2">Building Kerala&apos;s Digital Heritage</p>
           </div>
-          
+
           <LiveContributors />
         </section>
 
@@ -672,7 +695,7 @@ function BespokeProjectDetail({ content }: { content: ProjectContent }) {
               This project is not just a listing platform. It is a community-driven initiative to promote Kerala's traditional food culture, support local businesses, and help people discover the best local experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a 
+              <a
                 href={content.github || "/join"}
                 target={content.github ? "_blank" : "_self"}
                 rel={content.github ? "noopener noreferrer" : ""}
@@ -706,7 +729,7 @@ function GenericProjectDetail({ project }: { project: Project }) {
           <a href="/events" className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 border-2 border-black font-black uppercase text-xs shadow-[4px_4px_0px_0px_rgba(255,230,109,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
             ← Back to Projects
           </a>
-          
+
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-sm font-black uppercase tracking-widest">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -780,7 +803,7 @@ function GenericProjectDetail({ project }: { project: Project }) {
               Join the Kerala Coders Cafe community and help us build {project.name}. Whether you are a developer, designer, or researcher, your contribution matters.
             </p>
             <div className="flex justify-center">
-              <a 
+              <a
                 href={project.github || "/join"}
                 target={project.github ? "_blank" : "_self"}
                 rel={project.github ? "noopener noreferrer" : ""}
@@ -827,7 +850,7 @@ export default function SlugRedirectPage({
 }) {
   const { slug } = use(params);
   const project = REPOS.find((r) => r.slug === slug);
-  
+
   if (!project) notFound();
 
   const bespokeDetails = PROJECT_DETAILS[project.id];
